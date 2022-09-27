@@ -38,8 +38,8 @@ const SignIn = () => {
       credentials: "include",
       body: JSON.stringify(body),
     };
-    
-    fetch(`${API}/auth/sign-in`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/auth/sign-in`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         localStorage.setItem("user", JSON.stringify(data));

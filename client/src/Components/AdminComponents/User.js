@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
@@ -17,7 +16,7 @@ const User = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/users/get-one/${id}`, JSON.stringify(requestOptions))
+    fetch(`${API}/users/get-one/${id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setUsr(data.user);

@@ -40,8 +40,8 @@ const SignUp = () => {
       credentials: "include",
       body: JSON.stringify(body),
     };
-    
-    fetch(`${API}/auth/sign-up`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/auth/sign-up`, requestOptions)
       .then(async (res) => {
         Swal.fire("Registrado!!", "Te has registrado sactisfactoriamente", "success");
         navigate("/sign-in");

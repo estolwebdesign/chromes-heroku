@@ -56,7 +56,7 @@ const UserTransactions = () => {
         credentials: "include",
       };
 
-      fetch(`${API}/transactions/${user.id}`, JSON.stringify(requestOptions))
+      fetch(`${API}/transactions/${user.id}`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setTransactions(data.transactions);
@@ -79,7 +79,7 @@ const UserTransactions = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/users/get-repeated/${userId}`, JSON.stringify(requestOptions))
+    fetch(`${API}/users/get-repeated/${userId}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setRepeated(data.repeated);
@@ -102,7 +102,7 @@ const UserTransactions = () => {
       body: JSON.stringify(body),
     };
 
-    fetch(`${API}/transactions/select-chrome/${trans}/${user.id}`, JSON.stringify(requestOptions))
+    fetch(`${API}/transactions/select-chrome/${trans}/${user.id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);
@@ -125,7 +125,7 @@ const UserTransactions = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/transactions/cancel/${id}/${user.id}`, JSON.stringify(requestOptions))
+    fetch(`${API}/transactions/cancel/${id}/${user.id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);
@@ -141,8 +141,8 @@ const UserTransactions = () => {
       method: "PUT",
       credentials: "include",
     };
-    
-    fetch(`${API}/transactions/accept/${id}/${user.id}`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/transactions/accept/${id}/${user.id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);
@@ -158,8 +158,8 @@ const UserTransactions = () => {
       method: "PUT",
       credentials: "include",
     };
-    
-    fetch(`${API}/transactions/close/${id}/${user.id}`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/transactions/close/${id}/${user.id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);
@@ -198,7 +198,7 @@ const UserTransactions = () => {
       remitter: user.id,
       receiver: user.id === transaction.from._id ? transaction.to : transaction.from,
       content: message,
-    }
+    };
 
     const requestOptions = {
       method: "POST",
@@ -206,8 +206,8 @@ const UserTransactions = () => {
       credentials: "include",
       body: JSON.stringify(body),
     };
-    
-    fetch(`${API}/messages/new-message`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/messages/new-message`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         const messages = data.transaction.messages;
@@ -243,8 +243,8 @@ const UserTransactions = () => {
       credentials: "include",
       body: JSON.stringify(body),
     };
-    
-    fetch(`${API}/transactions/rate/${transaction._id}`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/transactions/rate/${transaction._id}`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);

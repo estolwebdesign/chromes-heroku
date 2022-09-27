@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -35,7 +34,7 @@ const SearchChromes = () => {
         body: JSON.stringify(body),
       };
 
-      fetch(`${API}/auth/check-signed`, JSON.stringify(requestOptions))
+      fetch(`${API}/auth/check-signed`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           if (data.id) {
@@ -65,7 +64,7 @@ const SearchChromes = () => {
         credentials: "include",
       };
 
-      fetch(`${API}/users/get-nearest/${user.id}/5000`, JSON.stringify(requestOptions))
+      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setUsers(data.users);
@@ -100,7 +99,7 @@ const SearchChromes = () => {
       body: JSON.stringify(body),
     };
 
-    fetch(`${API}/transactions/create`, JSON.stringify(requestOptions))
+    fetch(`${API}/transactions/create`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         Swal.fire(

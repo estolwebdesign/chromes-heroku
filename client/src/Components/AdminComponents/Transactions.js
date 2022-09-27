@@ -15,7 +15,7 @@ const Transactions = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/admin/transactions/get-all`, JSON.stringify(requestOptions))
+    fetch(`${API}/admin/transactions/get-all`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setTransactions(data.transactions);

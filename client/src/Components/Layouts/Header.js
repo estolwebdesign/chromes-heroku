@@ -15,7 +15,7 @@ const Header = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/auth/sign-out`, JSON.stringify(requestOptions))
+    fetch(`${API}/auth/sign-out`, requestOptions)
       .then(async (res) => {
         localStorage.removeItem("user");
         setUser(null);

@@ -17,8 +17,8 @@ function App() {
       method: "POST",
       credentials: "include",
     };
-    
-    fetch(`${API}/auth/check-signed`, JSON.stringify(requestOptions))
+
+    fetch(`${API}/auth/check-signed`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
         if (data.id) {
