@@ -60,10 +60,12 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (user) {
-
       axios
         .get(`${API}/users/get-nearest/${user.id}/5000`)
-        .then((res) => setUsers(res.data.users))
+        .then((res) => {
+          console.log(res.data);
+          setUsers(res.data.users);
+        })
         .catch((err) => console.error(err.response));
     }
 
