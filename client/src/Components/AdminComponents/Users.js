@@ -15,7 +15,7 @@ const Users = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/users/get-all`, JSON.stringify(requestOptions)
+    fetch(`${API}/users/get-all`, JSON.stringify(requestOptions))
       .then(async (res) => {
         const data = await res.json();
         setUsers(data.users);

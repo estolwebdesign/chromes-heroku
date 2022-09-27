@@ -16,7 +16,7 @@ const AdminDashboard = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/users/count`, JSON.stringify(requestOptions)
+    fetch(`${API}/users/count`, JSON.stringify(requestOptions))
       .then(async (res) => {
         const data = await res.json();
         setUsersCount(data.usersCount);
@@ -25,7 +25,7 @@ const AdminDashboard = () => {
         console.error(err);
       });
 
-    fetch(`${API}/users/chromes-count`, JSON.stringify(requestOptions)
+    fetch(`${API}/users/chromes-count`, JSON.stringify(requestOptions))
       .then(async (res) => {
         const data = await res.json();
         setChromesCount({

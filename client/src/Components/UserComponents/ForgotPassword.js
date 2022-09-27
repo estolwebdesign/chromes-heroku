@@ -28,7 +28,7 @@ const ForgotPassword = () => {
       body: JSON.stringify(body),
     };
 
-    fetch(`${API}/auth/forgot-password`, JSON.stringify(requestOptions)
+    fetch(`${API}/auth/forgot-password`, JSON.stringify(requestOptions))
       .then(async (res) => {
         Swal.fire("Solicitud ingresada", "Su solicitud de cambio de contraseña ha sido ingresada y le ha sido enviado un correo electronico con un link para ingresar una nueva contraseña", "success");
         navigate("/sign-in");

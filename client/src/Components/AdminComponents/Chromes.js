@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { API, PRODUCTION_API } from "../../Global";
-import { Link } from "react-router-dom";
+import { API } from "../../Global";
 import UserContext from "../../Context/UserContext";
 import Error from "../Layouts/Error";
 
@@ -15,7 +14,7 @@ const Chromes = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/chromes/get-all`, JSON.stringify(requestOptions)
+    fetch(`${API}/chromes/get-all`, JSON.stringify(requestOptions))
       .then(async (res) => {
         const data = await res.json();
         setChromes(data.chromes);
@@ -46,7 +45,7 @@ const Chromes = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/chromes/create-all`, JSON.stringify(requestOptions).catch((err) => {
+    fetch(`${API}/chromes/create-all`, JSON.stringify(requestOptions)).catch((err) => {
       console.error(err);
     });
   };
