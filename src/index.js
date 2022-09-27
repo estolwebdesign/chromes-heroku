@@ -54,7 +54,7 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://vast-chamber-38190.herokuapp.com']
+const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromeswap.herokuapp.com']
 
 var corsOptions = {
   origin: function (origin, callback) {
@@ -71,7 +71,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
