@@ -24,7 +24,7 @@ const ResetPassword = () => {
         credentials: "include",
       };
 
-      fetch(`${API}/auth/validate-token/${token}`, requestOptions)
+      fetch(`${API}/auth/validate-token/${token}`, JSON.stringify(requestOptions)
         .then(async (res) => {
           const data = await res.json();
           if (data.message === "Token verified successfully.") {
@@ -58,7 +58,7 @@ const ResetPassword = () => {
       body: JSON.stringify(body),
     };
 
-    fetch(`${API}/auth/set-new-password/${token}`, requestOptions)
+    fetch(`${API}/auth/set-new-password/${token}`, JSON.stringify(requestOptions)
       .then(async (res) => {
         Swal.fire("Contraseña reseteada", "El proceso de cambio de contraseña ha sido exitoso, ya puedes ingresar nuevamente a tu cuenta de ChromeSwap", "success");
         navigate("/sign-in");

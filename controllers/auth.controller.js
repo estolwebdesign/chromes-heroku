@@ -83,9 +83,7 @@ exports.authController = {
           res.cookie("token", token, {
             httpOnly: true,
             maxAge: 86400000,
-            sameSite : "none",
             secure: true,
-            domain: "http://localhost:3000"
           });
           res.status(200).json({
             id: user._id,

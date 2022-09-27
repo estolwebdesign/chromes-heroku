@@ -39,7 +39,7 @@ const SignIn = () => {
       body: JSON.stringify(body),
     };
     
-    fetch(`${API}/auth/sign-in`, requestOptions)
+    fetch(`${API}/auth/sign-in`, JSON.stringify(requestOptions)
       .then(async (res) => {
         const data = await res.json();
         localStorage.setItem("user", JSON.stringify(data));

@@ -15,7 +15,7 @@ const Chromes = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/chromes/get-all`, requestOptions)
+    fetch(`${API}/chromes/get-all`, JSON.stringify(requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setChromes(data.chromes);
@@ -46,7 +46,7 @@ const Chromes = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/chromes/create-all`, requestOptions).catch((err) => {
+    fetch(`${API}/chromes/create-all`, JSON.stringify(requestOptions).catch((err) => {
       console.error(err);
     });
   };

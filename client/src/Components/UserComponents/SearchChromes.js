@@ -35,7 +35,7 @@ const SearchChromes = () => {
         body: JSON.stringify(body),
       };
 
-      fetch(`${API}/auth/check-signed`, requestOptions)
+      fetch(`${API}/auth/check-signed`, JSON.stringify(requestOptions)
         .then(async (res) => {
           const data = await res.json();
           if (data.id) {
@@ -65,7 +65,7 @@ const SearchChromes = () => {
         credentials: "include",
       };
 
-      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
+      fetch(`${API}/users/get-nearest/${user.id}/5000`, JSON.stringify(requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setUsers(data.users);
@@ -100,7 +100,7 @@ const SearchChromes = () => {
       body: JSON.stringify(body),
     };
 
-    fetch(`${API}/transactions/create`, requestOptions)
+    fetch(`${API}/transactions/create`, JSON.stringify(requestOptions)
       .then(async (res) => {
         const data = await res.json();
         Swal.fire(

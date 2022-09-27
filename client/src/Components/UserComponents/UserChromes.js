@@ -18,7 +18,7 @@ const UserChromes = () => {
       credentials: "include",
     };
     
-    fetch(`${API}/chromes/get-all`, requestOptions)
+    fetch(`${API}/chromes/get-all`, JSON.stringify(requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setChromes(data.chromes);
@@ -51,7 +51,7 @@ const UserChromes = () => {
       credentials: "include",
     };
     
-    await fetch(`${API}/users/add-chrome/${user.id}/${chromeId}`, requestOptions)
+    await fetch(`${API}/users/add-chrome/${user.id}/${chromeId}`, JSON.stringify(requestOptions)
       .then(async (res) => {
         const data = await res.json();
         setUserChromes(data.user.chromes);
@@ -81,7 +81,7 @@ const UserChromes = () => {
           credentials: "include",
         };
         
-        fetch(`${API}/users/remove-chrome/${user.id}/${chromeId}`, requestOptions)
+        fetch(`${API}/users/remove-chrome/${user.id}/${chromeId}`, JSON.stringify(requestOptions)
           .then(async (res) => {
             const data = await res.json();
             setUserChromes(data.user.chromes);
