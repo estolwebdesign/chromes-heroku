@@ -61,7 +61,7 @@ const SearchChromes = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`${API}/users/get-nearest/${user.id}/5000`)
+        .post(`${API}/users/get-nearest/${user.id}/5000`)
         .then((res) => {
           console.log(res.data);
           setUsers(res.data.users);
