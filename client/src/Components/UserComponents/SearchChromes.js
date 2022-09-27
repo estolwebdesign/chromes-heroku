@@ -63,11 +63,8 @@ const SearchChromes = () => {
       };
 
       fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
-        .then(async (res) => {
-          console.log(res)
-          // const data = await res.json();
-          // setUsers(data.users);
-        })
+        .then((response) => response.json())
+        .then((users) => console.log(users))
         .catch((err) => {
           console.error(err.message);
         });
