@@ -41,7 +41,6 @@ const SearchChromes = () => {
             setUser(data);
           }
           if (data.message === "jwt expired") {
-            setUser(null);
             Swal.fire({
               title: "Su sesión ha expirado",
               icon: "warning",
@@ -49,7 +48,6 @@ const SearchChromes = () => {
           }
         })
         .catch((err) => {
-          setUser(null);
           console.error(err);
         });
     }
