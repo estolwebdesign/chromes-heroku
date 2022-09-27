@@ -54,7 +54,7 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://shrouded-journey-38552.heroku...']
+const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://vast-chamber-38190.herokuapp.com']
 
 var corsOptions = {
   origin: function (origin, callback) {
