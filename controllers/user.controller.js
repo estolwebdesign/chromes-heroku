@@ -210,7 +210,7 @@ exports.userController = {
 
       return res.status(200).json({
         status: "success",
-        users: nearest,
+        users: JSON.stringify(nearest),
       });
     } catch (err) {
       return res.status(500).json({
