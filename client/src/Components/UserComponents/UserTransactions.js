@@ -3,7 +3,7 @@ import { faUser, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
-import { API, HOST, PRODUCTION_API } from "../../Global";
+import { API, HOST } from "../../Global";
 import Swal from "sweetalert2";
 import Moment from "react-moment";
 import "moment/locale/es-mx";
