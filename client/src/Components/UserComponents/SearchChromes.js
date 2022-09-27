@@ -59,6 +59,7 @@ const SearchChromes = () => {
     if (user) {
       const requestOptions = {
         method: "GET",
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
       };
 
