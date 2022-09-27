@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UserContext from "../../Context/UserContext";
 import { API, PRODUCTION_API } from "../../Global";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 const SearchChromes = () => {
   const { user, setUser } = useContext(UserContext);
@@ -57,18 +60,11 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (user) {
-      const requestOptions = {
-        method: "GET",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        credentials: "include",
-      };
 
-      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
-        .then((response) => response.json())
-        .then((users) => console.log(users))
-        .catch((err) => {
-          console.error(err.message);
-        });
+      axios
+        .get(`${API}/users/get-nearest/${user.id}/5000`)
+        .then((res) => setUsers(res.data.users))
+        .catch((err) => console.error(err.response));
     }
 
     if (user === null) {
