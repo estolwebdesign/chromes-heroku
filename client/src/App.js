@@ -33,7 +33,7 @@ function App() {
         }
       })
       .catch((err) => {
-        setUser(null);
+        setUser();
         console.error(err);
       });
 
