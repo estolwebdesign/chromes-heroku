@@ -59,7 +59,7 @@ exports.newTransactionEmail = (transaction) => {
     <body class="clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #f8f9fa">
       <header style="display: flex">
         <div class="w-500 bg-qatar mx-auto" style="border-radius: 10px 10px 0 0">
-          <a style="text-decoration: none" class="text-light" href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
+          <a style="text-decoration: none" class="text-light" href="https://chromeswap.herokuapp.com" target="_blank" rel="noopener noreferrer">
             <h1 class="center">ChromeSwap</h1>
           </a>
         </div>
@@ -71,11 +71,11 @@ exports.newTransactionEmail = (transaction) => {
           <p>Has recibido una nueva solicitud de intercambio del usuario ${transaction.from.username}.</p>
           <p>El esta solicitando que le cambies tu figurita ${transaction.chromes.get.name}. Ahora tu puedes ver sus figuritas repetidas para elegir una que tu necesites, pero en caso de que no te interese ninguna, puedes rechazar el intercambio</p>
           <div class="center">
-            <a href="http://localhost:3000/my-transactions" target="_blank" rel="noopener noreferrer" class="btn-qatar">Ver intercambio</a>
+            <a href="https://chromeswap.herokuapp.com/my-transactions" target="_blank" rel="noopener noreferrer" class="btn-qatar">Ver intercambio</a>
           </div>
           <hr style="margin-top: 20px;">
           <p>Si el botón no funciona ingresa al siguiente link:</p>
-          <a href="http://localhost:3000/my-transactions" target="_blank" rel="noopener noreferrer">http://localhost:3000/my-transactions</a>
+          <a href="https://chromeswap.herokuapp.com/my-transactions" target="_blank" rel="noopener noreferrer">https://chromeswap.herokuapp.com/my-transactions</a>
         </section>
       </main>
       <footer style="display: flex">
