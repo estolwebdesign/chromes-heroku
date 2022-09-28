@@ -9,7 +9,7 @@ module.exports = function (app) {
   });
 
   app.post("/api/transactions/create", [authJwt.verifyToken, authJwt.isUser], controller.newTransaction);
-  app.get("/api/transactions/:id", [authJwt.verifyToken, authJwt.isUser], controller.getUserTransactions);
+  app.post("/api/transactions/:id", [authJwt.verifyToken, authJwt.isUser], controller.getUserTransactions);
   app.put("/api/transactions/select-chrome/:id/:userId", [authJwt.verifyToken, authJwt.isUser], controller.selectChrome);
   app.put("/api/transactions/accept/:id/:userId", [authJwt.verifyToken, authJwt.isUser], controller.accept);
   app.put("/api/transactions/cancel/:id/:userId", [authJwt.verifyToken, authJwt.isUser], controller.cancel);

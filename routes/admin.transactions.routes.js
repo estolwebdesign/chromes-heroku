@@ -8,6 +8,6 @@ module.exports = function (app) {
   });
 
   // admin routes
-  app.get("/api/admin/transactions/get-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.getAll);
-  app.get("/api/admin/transactions/get-one/:id", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.getOne);
+  app.post("/api/admin/transactions/get-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.getAll);
+  app.post("/api/admin/transactions/get-one/:id", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.getOne);
 };

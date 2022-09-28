@@ -10,7 +10,7 @@ const Chromes = () => {
 
   useEffect(() => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 
@@ -41,7 +41,7 @@ const Chromes = () => {
 
   const handleAddChromes = () => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 

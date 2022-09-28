@@ -7,9 +7,9 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("/api/chromes/get-all", [authJwt.verifyToken, authJwt.isUser], controller.getAll);
+  app.post("/api/chromes/get-all", [authJwt.verifyToken, authJwt.isUser], controller.getAll);
   app.post("/api/chromes/create", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.create);
-  app.get("/api/chromes/create-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.createAll);
+  app.post("/api/chromes/create-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], controller.createAll);
 
   // user controller
 };

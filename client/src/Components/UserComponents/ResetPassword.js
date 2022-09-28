@@ -19,7 +19,7 @@ const ResetPassword = () => {
   useEffect(() => {
     if (token) {
       const requestOptions = {
-        method: "GET",
+        method: "POST",
         credentials: "include",
       };
 

@@ -52,7 +52,7 @@ const UserTransactions = () => {
   useEffect(() => {
     if (user) {
       const requestOptions = {
-        method: "GET",
+        method: "POST",
         credentials: "include",
       };
 
@@ -75,7 +75,7 @@ const UserTransactions = () => {
 
   const getRepeated = (transId, userId) => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 

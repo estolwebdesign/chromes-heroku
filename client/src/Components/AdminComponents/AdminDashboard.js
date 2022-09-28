@@ -12,7 +12,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 

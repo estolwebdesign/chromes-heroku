@@ -19,17 +19,17 @@ module.exports = function (app) {
   app.post("/api/auth/check-signed", [authJwt.verifyToken, authJwt.isUser], controller.sendUser);
   app.post("/api/auth/sign-out", [authJwt.verifyToken, authJwt.isUser], controller.logout);
   app.post("/api/auth/forgot-password", controller.passwordResetToken);
-  app.get("/api/auth/validate-token/:token", controller.validResetToken);
+  app.post("/api/auth/validate-token/:token", controller.validResetToken);
   app.put("/api/auth/set-new-password/:token", controller.newPassword);
 
   // user controller
-  app.get("/api/users/count", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.count);
-  app.get("/api/users/get-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.getAll);
-  app.get("/api/users/get-one/:id", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.getOne);
-  app.get("/api/users/chromes-count", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.userChromesCount);
-  app.get("/api/users/add-chrome/:userId/:chromeId", [authJwt.verifyToken, authJwt.isUser], userController.addChrome);
+  app.post("/api/users/count", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.count);
+  app.post("/api/users/get-all", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.getAll);
+  app.post("/api/users/get-one/:id", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.getOne);
+  app.post("/api/users/chromes-count", [authJwt.verifyToken, authJwt.isAdminOrModerator], userController.userChromesCount);
+  app.post("/api/users/add-chrome/:userId/:chromeId", [authJwt.verifyToken, authJwt.isUser], userController.addChrome);
   app.put("/api/users/remove-chrome/:userId/:chromeId", [authJwt.verifyToken, authJwt.isUser], userController.removeChrome);
   app.post("/api/users/set-location/:id", [authJwt.verifyToken, authJwt.isUser], userController.setLocation);
   app.post("/api/users/get-nearest/:id/:distance", [authJwt.verifyToken, authJwt.isUser], userController.getNearestUsers);
-  app.get("/api/users/get-repeated/:id", [authJwt.verifyToken, authJwt.isUser], userController.getRepeated);
+  app.post("/api/users/get-repeated/:id", [authJwt.verifyToken, authJwt.isUser], userController.getRepeated);
 };

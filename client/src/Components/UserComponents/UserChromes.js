@@ -14,7 +14,7 @@ const UserChromes = () => {
 
   useEffect(() => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 
@@ -47,7 +47,7 @@ const UserChromes = () => {
     setClicked(chromeId);
 
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 

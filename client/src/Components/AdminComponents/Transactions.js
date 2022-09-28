@@ -11,7 +11,7 @@ const Transactions = () => {
 
   useEffect(() => {
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     };
 
