@@ -12,7 +12,6 @@ function App() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-
     const requestOptions = {
       method: "POST",
       credentials: "include",
@@ -21,9 +20,6 @@ function App() {
     fetch(`${API}/auth/check-signed`, requestOptions)
       .then(async (res) => {
         const data = await res.json();
-        if (data.id) {
-          setUser(data);
-        }
         if (data.message === "jwt expired") {
           setUser(null);
           Swal.fire({
@@ -31,9 +27,14 @@ function App() {
             icon: "warning",
           });
         }
+        if (data.id) {
+          setUser(data);
+        } else {
+          setUser(null);
+        }
       })
       .catch((err) => {
-        setUser();
+        setUser(null);
         console.error(err);
       });
 
