@@ -213,6 +213,7 @@ exports.userController = {
         users: nearest,
       });
     } catch (err) {
+      console.error(err.message);
       return res.status(500).json({
         status: "error",
         message: err.message,
