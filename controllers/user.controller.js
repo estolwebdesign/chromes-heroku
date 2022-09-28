@@ -188,7 +188,7 @@ exports.userController = {
       const nearest = [];
 
       users.map((user, i) => {
-        if (user._id != req.params.id && user.location) {
+        if (user._id != req.params.id && user.location.lat) {
           const distance = geolib.getDistance(
             {
               lat: mainUser.location.lat,
