@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { API, TEAMS, PRODUCTION_API } from "../../Global";
+import { API, TEAMS } from "../../Global";
 import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "../Layouts/Loader";
 
 const UserChromes = () => {
   const [chromes, setChromes] = useState();
@@ -37,7 +38,7 @@ const UserChromes = () => {
     }
 
     if (user === null) {
-      navigate("/sign-in");
+      navigate("/sign");
     }
 
     return () => {};
@@ -101,28 +102,16 @@ const UserChromes = () => {
   return (
     <main>
       <div className="container my-3 p-3 bg-light rounded">
-        {user === undefined ? (
-          <div className="text-center">
-            <div className="lds-grid">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
+        <div className="d-flex flex-column position-relative">
+          <hr className="text-light mt-4 w-100 position-absolute" style={{ borderTop: "4px solid #5c0931" }} />
+          <h1 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light" style={{ zIndex: "1050" }}>
+            FIGURITAS
+          </h1>
+        </div>
+        {!chromes || user === undefined ? (
+          <Loader />
         ) : (
           <>
-            <div className="d-flex flex-column position-relative">
-              <hr className="text-light mt-4 w-100 position-absolute" style={{ borderTop: "4px solid #5c0931" }} />
-              <h1 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light" style={{ zIndex: "1050" }}>
-                FIGURITAS
-              </h1>
-            </div>
             <div className="pt-3">
               <section id="fwc-1" className="bg-qatar bg-team rounded mt-3 shadow">
                 <div className="row g-2">

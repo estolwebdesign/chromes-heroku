@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { API, PRODUCTION_API } from "../../Global";
+import { API } from "../../Global";
 import useForm from "../../Hooks/useForm";
 
 const ForgotPassword = () => {
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
     fetch(`${API}/auth/forgot-password`, requestOptions)
       .then(async (res) => {
         Swal.fire("Solicitud ingresada", "Su solicitud de cambio de contraseña ha sido ingresada y le ha sido enviado un correo electronico con un link para ingresar una nueva contraseña", "success");
-        navigate("/sign-in");
+        navigate("/sign");
       })
       .catch((err) => {
         console.error(err);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { API, PRODUCTION_API } from "../../Global";
+import { Link } from "react-router-dom";
+import { API } from "../../Global";
 import UserContext from "../../Context/UserContext";
 import Error from "../Layouts/Error";
 

@@ -176,12 +176,16 @@ exports.userController = {
     try {
       const mainUser = await User.findById(req.params.id);
 
-      const users = await User.find({}, "username repeated location").populate([
+      const users = await User.find({}, "username repeated location transactions").populate([
         {
           path: "repeated",
           populate: {
             path: "chrome",
           },
+        },
+        {
+          path: "transactions",
+          select: "from to userRates",
         },
       ]);
 
@@ -201,7 +205,21 @@ exports.userController = {
           );
 
           if (distance < req.params.distance) {
-            nearest.push(user);
+            const rates = [];
+            user.transactions.map((trans, i) => {
+              return trans.from.toString() === user._id.toString() && trans.userRates.offerer.rate
+                ? rates.push(trans.userRates.offerer.rate)
+                : trans.to.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
+            });
+            const rating = rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
+            nearest.push({
+              _id: user._id,
+              username: user.username,
+              repeated: user.repeated,
+              distance: distance,
+              rating: rating,
+              transactions: user.transactions.length,
+            });
           }
         }
 

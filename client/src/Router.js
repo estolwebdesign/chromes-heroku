@@ -9,12 +9,12 @@ import Transactions from "./Components/AdminComponents/Transactions";
 import User from "./Components/AdminComponents/User";
 import Users from "./Components/AdminComponents/Users";
 import Error from "./Components/Layouts/Error";
+import Footer from "./Components/Layouts/Footer";
 import Header from "./Components/Layouts/Header";
 import ForgotPassword from "./Components/UserComponents/ForgotPassword";
 import ResetPassword from "./Components/UserComponents/ResetPassword";
 import SearchChromes from "./Components/UserComponents/SearchChromes";
-import SignIn from "./Components/UserComponents/SignIn";
-import SignUp from "./Components/UserComponents/SignUp";
+import Sign from "./Components/UserComponents/Sign";
 import UserChromes from "./Components/UserComponents/UserChromes";
 import UserDashboard from "./Components/UserComponents/UserDashboard";
 import UserTransactions from "./Components/UserComponents/UserTransactions";
@@ -28,8 +28,7 @@ const Router = () => {
         <Route path="/my-chromes" element={<UserChromes />} />
         <Route path="/my-transactions" element={<UserTransactions />} />
         <Route path="/search-chromes" element={<SearchChromes />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign" element={<Sign />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 
@@ -45,6 +44,7 @@ const Router = () => {
         {/* error */}
         <Route path="*" element={<Error code={404} />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };

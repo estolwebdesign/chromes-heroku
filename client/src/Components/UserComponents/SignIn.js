@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { API, PRODUCTION_API } from "../../Global";
+import { API } from "../../Global";
 import useForm from "../../Hooks/useForm";
 import { useContext } from "react";
 import UserContext from "../../Context/UserContext";
@@ -25,6 +25,8 @@ const SignIn = () => {
     }
 
     return () => {};
+    
+    // eslint-disable-next-line
   }, [user]);
 
   const handleSubmit = (e) => {
@@ -57,6 +59,9 @@ const SignIn = () => {
     <main>
       <div className="container-fluid">
         <div className="row justify-content-center">
+          <div className="col">
+            <h1>ChromeSwap</h1>
+          </div>
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
             <form onSubmit={handleSubmit} className="bg-light rounded p-3 shadow mt-3">
               <h1 className="text-center">Ingresar</h1>

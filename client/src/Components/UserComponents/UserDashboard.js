@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Layouts/Loader";
 
 const UserDashboard = () => {
   const { user } = useContext(UserContext);
@@ -9,7 +10,7 @@ const UserDashboard = () => {
   useEffect(() => {
     if (user !== undefined) {
       if (!user) {
-        navigate("/sign-in");
+        navigate("/sign");
       } else {
         navigate("/search-chromes");
       }
@@ -19,19 +20,7 @@ const UserDashboard = () => {
   }, [user, navigate]);
 
   return (
-    <div className="text-center">
-      <div className="lds-grid">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Loader />
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
-import { API, PRODUCTION_API } from "../../Global";
+import { API } from "../../Global";
 import Swal from "sweetalert2";
+import logo from "../../chromeswap-logo.png";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -31,10 +32,10 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-qatar">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-qatar fixed-top" style={{ zIndex: "1100" }}>
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          ChromeSwap
+          <img src={logo} alt="chromeswap" height="60px" />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -44,13 +45,8 @@ const Header = () => {
             {!user ? (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/sign-in">
+                  <NavLink className="nav-link" to="/sign">
                     Ingresar
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/sign-up">
-                    Registrarme
                   </NavLink>
                 </li>
               </>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
-import { API, PRODUCTION_API } from "../../Global";
+import { API } from "../../Global";
 import Error from "../Layouts/Error";
 
 const User = () => {
@@ -26,6 +26,8 @@ const User = () => {
       });
 
     return () => {};
+    
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

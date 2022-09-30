@@ -8,9 +8,9 @@ import Swal from "sweetalert2";
 import Moment from "react-moment";
 import "moment/locale/es-mx";
 import useForm from "../../Hooks/useForm";
-import $ from "jquery";
 import { io } from "socket.io-client";
 import Modal from "react-bootstrap/Modal";
+import Loader from "../Layouts/Loader";
 
 const UserTransactions = () => {
   const socket = useRef();
@@ -47,6 +47,7 @@ const UserTransactions = () => {
     }
 
     return () => {};
+    // eslint-disable-next-line
   }, [receivedMsg]);
 
   useEffect(() => {
@@ -67,11 +68,11 @@ const UserTransactions = () => {
     }
 
     if (user === null) {
-      navigate("/sign-in");
+      navigate("/sign");
     }
 
     return () => {};
-  }, [user]);
+  }, [user, navigate]);
 
   const getRepeated = (transId, userId) => {
     const requestOptions = {
@@ -269,266 +270,276 @@ const UserTransactions = () => {
           </h1>
         </div>
         <section className="transactions">
-          {transactions?.map((trans, i) => (
-            <article id={`transaction-${trans._id}`} key={i} className="border border-qatar rounded mt-2">
-              <div className="row g-2 p-2">
-                <div className="col">
-                  <div className="fs-3 d-flex justify-content-center pb-2">
-                    <FontAwesomeIcon icon={faArrowRight} />
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  <div
-                    className={`${(user?.id === trans.from._id && !trans.chromes.get) || (user?.id === trans.to._id && !trans.chromes.drop) ? "bg-secondary" : "bg-success"}  mx-auto rounded `}
-                    style={{ height: "200px", width: "133px" }}
-                  >
-                    <div className="d-flex flex-column h-100">
-                      <div className={`${(user?.id === trans.from._id && !trans.chromes.get) || (user?.id === trans.to._id && !trans.chromes.drop) ? "fs-5" : "fs-3"} text-light fw-bold m-auto`}>
-                        {user?.id === trans.from._id ? trans.chromes.get.name : user?.id === trans.to._id && trans.chromes.drop ? trans.chromes.drop.name : "Desconocido"}
+          {!transactions ? (
+            <Loader />
+          ) : (
+            <>
+              {transactions.map((trans, i) => (
+                <article id={`transaction-${trans._id}`} key={i} className="border border-qatar rounded mt-2">
+                  <div className="row g-2 p-2">
+                    <div className="col">
+                      <div className="fs-3 d-flex justify-content-center pb-2">
+                        <FontAwesomeIcon icon={faArrowRight} />
+                        <FontAwesomeIcon icon={faUser} />
+                      </div>
+                      <div
+                        className={`${(user?.id === trans.from._id && !trans.chromes.get) || (user?.id === trans.to._id && !trans.chromes.drop) ? "bg-secondary" : "bg-success"}  mx-auto rounded `}
+                        style={{ height: "200px", width: "133px" }}
+                      >
+                        <div className="d-flex flex-column h-100">
+                          <div className={`${(user?.id === trans.from._id && !trans.chromes.get) || (user?.id === trans.to._id && !trans.chromes.drop) ? "fs-5" : "fs-3"} text-light fw-bold m-auto`}>
+                            {user?.id === trans.from._id ? trans.chromes.get.name : user?.id === trans.to._id && trans.chromes.drop ? trans.chromes.drop.name : "Desconocido"}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="fs-3 d-flex justify-content-center pb-2">
-                    <FontAwesomeIcon icon={faUser} />
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </div>
-                  <div
-                    className={`mx-auto rounded ${(user?.id === trans.from._id && !trans.chromes.drop) || (user?.id === trans.to._id && !trans.chromes.get) ? "bg-secondary" : "bg-success"}`}
-                    style={{ height: "200px", width: "133px" }}
-                  >
-                    <div className="d-flex flex-column h-100">
-                      <div className={`${(user?.id === trans.from._id && !trans.chromes.drop) || (user?.id === trans.to._id && !trans.chromes.get) ? "fs-5" : "fs-3"} text-light fw-bold m-auto`}>
-                        {user?.id === trans.from._id && trans.chromes.drop ? trans.chromes.drop.name : user?.id === trans.to._id && trans.chromes.get ? trans.chromes.get.name : "Desconocido"}
+                    <div className="col">
+                      <div className="fs-3 d-flex justify-content-center pb-2">
+                        <FontAwesomeIcon icon={faUser} />
+                        <FontAwesomeIcon icon={faArrowRight} />
+                      </div>
+                      <div
+                        className={`mx-auto rounded ${(user?.id === trans.from._id && !trans.chromes.drop) || (user?.id === trans.to._id && !trans.chromes.get) ? "bg-secondary" : "bg-success"}`}
+                        style={{ height: "200px", width: "133px" }}
+                      >
+                        <div className="d-flex flex-column h-100">
+                          <div className={`${(user?.id === trans.from._id && !trans.chromes.drop) || (user?.id === trans.to._id && !trans.chromes.get) ? "fs-5" : "fs-3"} text-light fw-bold m-auto`}>
+                            {user?.id === trans.from._id && trans.chromes.drop ? trans.chromes.drop.name : user?.id === trans.to._id && trans.chromes.get ? trans.chromes.get.name : "Desconocido"}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="text-center fs-3 fw-bold">Usuario: {user?.id === trans.from._id ? trans.to.username : trans.from.username}</div>
-                  <table className="table table-striped text-center border p-1 rounded">
-                    <tbody>
-                      <tr>
-                        <th scope="row" className="px-4">
-                          Estado:
-                        </th>
-                        <td className={!trans.accepted && !trans.cancelled && !trans.closed ? "bg-warning" : trans.accepted ? "bg-primary" : trans.closed ? "bg-success" : "bg-danger"}>
-                          {!trans.accepted && !trans.cancelled && !trans.closed ? (
-                            <span className="text-dark fw-bold">PENDIENTE</span>
-                          ) : trans.accepted ? (
-                            <span className="text-light fw-bold">ACEPTADA</span>
-                          ) : trans.closed ? (
-                            <span className="text-light fw-bold">FINALIZADA</span>
-                          ) : (
-                            trans.cancelled && <span className="text-light fw-bold">CANCELADA</span>
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="px-4">
-                          Descipción:
-                        </th>
-                        <td>
-                          {!trans.chromes.drop ? (
-                            <span>
-                              {user?.id === trans.from._id
-                                ? `${trans.to.username} tiene que elegir una de tus figuritas repetidas`
-                                : `Es tu turno de elegir una figurita de ${trans.from.username} para realizar el itercambio. Si no encuentras ninguna figurita que necesites puedes rechazar el intercambio`}
-                            </span>
-                          ) : trans.chromes.drop && (!trans.accepted || !trans.cancelled) ? (
-                            <span>
-                              {user?.id === trans.from._id
-                                ? `${trans.to.username} ya eligió unas de tus figuritas repetidas, ahora te toca a ti decidir si aceptas el intercambio o no.`
-                                : `${trans.from.username} tiene que decidir si acepta el intercambio por la figurita que elegiste o no.`}{" "}
-                            </span>
-                          ) : trans.accepted && !trans.cancelled ? (
-                            <span>La transaccion fue aceptada por ambas partes, ya pueden empezar a hablar entre ustedes para coordinar el intercambio.</span>
-                          ) : (
-                            trans.cancelled && <span>La transaccion ha sido cancelada.</span>
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="px-4">
-                          Acciones:
-                        </th>
-                        <td>
-                          {user?.id === trans.to._id && !trans.chromes.drop ? (
-                            <div className="btn-group">
-                              <button className="btn btn-sm btn-primary" onClick={() => getRepeated(trans._id, trans.from._id)} data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">
-                                Elegir figurita
-                              </button>
-                              <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
-                                Cancelar intercambio
-                              </button>
-                            </div>
-                          ) : user?.id === trans.from._id && trans.chromes.drop && trans.accepted === null && !trans.closed && !trans.cancelled ? (
-                            <div className="btn-group">
-                              <button onClick={() => acceptTransaction(trans._id)} className="btn btn-sm btn-success">
-                                Aceptar intercambio
-                              </button>
-                              <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
-                                Cancelar intercambio
-                              </button>
-                            </div>
-                          ) : (
-                            trans.accepted && (
-                              <div className="btn-group">
-                                <button onClick={() => openChat(trans._id)} className="btn btn-sm btn-warning">
-                                  Abrir chat
-                                </button>
-                                <button onClick={() => closeTransaction(trans._id)} className="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#rateModal" type="button">
-                                  Intercambio finalizado
-                                </button>
-                                <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
-                                  Cancelar intercambio
-                                </button>
-                              </div>
-                            )
-                          )}
-                          {!trans.accepted && trans.closed && user.id === trans.from._id ? (
-                            <>
-                              {trans.userRates.recipiant.rate ? (
-                                <div>No hay acciones disponibles</div>
-                              ) : (
-                                <button
-                                  onClick={() => {
-                                    setTransaction(trans);
-                                  }}
-                                  className="btn btn-sm btn-warning"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#rateModal"
-                                  type="button"
-                                >
-                                  Calificar intercambio
-                                </button>
-                              )}
-                            </>
-                          ) : !trans.accepted && trans.closed && user.id === trans.to._id ? (
-                            <>
-                              {trans.userRates.offerer?.rate ? (
-                                <div>No hay acciones disponibles</div>
-                              ) : (
-                                <button
-                                  onClick={() => {
-                                    setTransaction(trans);
-                                  }}
-                                  className="btn btn-sm btn-warning"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#rateModal"
-                                  type="button"
-                                >
-                                  Calificar intercambio
-                                </button>
-                              )}
-                            </>
-                          ) : (
-                            <div>No hay acciones disponibles</div>
-                          )}
-                        </td>
-                      </tr>
-                      {(trans.userRates.recipiant.rate || trans.userRates.offerer.rate) && (
-                        <>
+                    <div className="col-lg-6">
+                      <div className="text-center fs-3 fw-bold">Usuario: {user?.id === trans.from._id ? trans.to.username : trans.from.username}</div>
+                      <table className="table table-striped text-center border p-1 rounded">
+                        <tbody>
                           <tr>
                             <th scope="row" className="px-4">
-                              Calificacion recibida
+                              Estado:
                             </th>
-                            <td>
-                              {user.id === trans.from._id && trans.userRates.offerer.rate ? (
-                                <>
-                                  {[1, 2, 3, 4, 5].map((num) => {
-                                    return trans.userRates.offerer.rate >= num ? (
-                                      <span key={num} className="star on fs-2">
-                                        &#9733;
-                                      </span>
-                                    ) : (
-                                      <span key={num} className="star off fs-2">
-                                        &#9733;
-                                      </span>
-                                    );
-                                  })}
-                                  {trans.userRates.offerer.value ? (
-                                    <div>{trans.userRates.offerer.value}</div>
-                                  ) : (
-                                    <small className="d-block">{trans.to.username} no ha escrito una valoracion sobre ti.</small>
-                                  )}
-                                </>
-                              ) : user.id === trans.to._id && trans.userRates.recipiant.rate ? (
-                                <>
-                                  {[1, 2, 3, 4, 5].map((num) => {
-                                    return trans.userRates.recipiant.rate >= num ? (
-                                      <span key={num} className="star on fs-2">
-                                        &#9733;
-                                      </span>
-                                    ) : (
-                                      <span key={num} className="star off fs-2">
-                                        &#9733;
-                                      </span>
-                                    );
-                                  })}
-                                  {trans.userRates.recipiant.value ? (
-                                    <div>{trans.userRates.recipiant.value}</div>
-                                  ) : (
-                                    <small className="d-block">{trans.from.username} no ha escrito una valoracion sobre ti.</small>
-                                  )}
-                                </>
+                            <td className={!trans.accepted && !trans.cancelled && !trans.closed ? "bg-warning" : trans.accepted ? "bg-primary" : trans.closed ? "bg-success" : "bg-danger"}>
+                              {!trans.accepted && !trans.cancelled && !trans.closed ? (
+                                <span className="text-dark fw-bold">PENDIENTE</span>
+                              ) : trans.accepted ? (
+                                <span className="text-light fw-bold">ACEPTADA</span>
+                              ) : trans.closed ? (
+                                <span className="text-light fw-bold">FINALIZADA</span>
                               ) : (
-                                <div>Nada por aquí aun</div>
+                                trans.cancelled && <span className="text-light fw-bold">CANCELADA</span>
                               )}
                             </td>
                           </tr>
                           <tr>
                             <th scope="row" className="px-4">
-                              Calificacion otorgada
+                              Descipción:
                             </th>
                             <td>
-                              {user.id === trans.from._id && trans.userRates.recipiant.rate ? (
-                                <>
-                                  {[1, 2, 3, 4, 5].map((num) => {
-                                    return trans.userRates.recipiant.rate >= num ? (
-                                      <span key={num} className="star on fs-2">
-                                        &#9733;
-                                      </span>
-                                    ) : (
-                                      <span key={num} className="star off fs-2">
-                                        &#9733;
-                                      </span>
-                                    );
-                                  })}
-                                  {trans.userRates.recipiant.value ? (
-                                    <div>{trans.userRates.recipiant.value}</div>
-                                  ) : (
-                                    <small className="d-block">No has escrito una valoracion sobre tu contraparte.</small>
-                                  )}
-                                </>
-                              ) : user.id === trans.to._id && trans.userRates.offerer.rate ? (
-                                <>
-                                  {[1, 2, 3, 4, 5].map((num) => {
-                                    return trans.userRates.offerer.rate >= num ? (
-                                      <span key={num} className="star on fs-2">
-                                        &#9733;
-                                      </span>
-                                    ) : (
-                                      <span key={num} className="star off fs-2">
-                                        &#9733;
-                                      </span>
-                                    );
-                                  })}
-                                  {trans.userRates.offerer.value ? <div>{trans.userRates.offerer.value}</div> : <small className="d-block">No has escrito una valoracion sobre tu contraparte.</small>}
-                                </>
+                              {!trans.chromes.drop ? (
+                                <span>
+                                  {user?.id === trans.from._id
+                                    ? `${trans.to.username} tiene que elegir una de tus figuritas repetidas`
+                                    : `Es tu turno de elegir una figurita de ${trans.from.username} para realizar el itercambio. Si no encuentras ninguna figurita que necesites puedes rechazar el intercambio`}
+                                </span>
+                              ) : trans.chromes.drop && (!trans.accepted || !trans.cancelled) ? (
+                                <span>
+                                  {user?.id === trans.from._id
+                                    ? `${trans.to.username} ya eligió unas de tus figuritas repetidas, ahora te toca a ti decidir si aceptas el intercambio o no.`
+                                    : `${trans.from.username} tiene que decidir si acepta el intercambio por la figurita que elegiste o no.`}{" "}
+                                </span>
+                              ) : trans.accepted && !trans.cancelled ? (
+                                <span>La transaccion fue aceptada por ambas partes, ya pueden empezar a hablar entre ustedes para coordinar el intercambio.</span>
                               ) : (
-                                <div>Nada por aquí aun</div>
+                                trans.cancelled && <span>La transaccion ha sido cancelada.</span>
                               )}
                             </td>
                           </tr>
-                        </>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </article>
-          ))}
+                          <tr>
+                            <th scope="row" className="px-4">
+                              Acciones:
+                            </th>
+                            <td>
+                              {user?.id === trans.to._id && !trans.chromes.drop ? (
+                                <div className="btn-group">
+                                  <button className="btn btn-sm btn-primary" onClick={() => getRepeated(trans._id, trans.from._id)} data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">
+                                    Elegir figurita
+                                  </button>
+                                  <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
+                                    Cancelar intercambio
+                                  </button>
+                                </div>
+                              ) : user?.id === trans.from._id && trans.chromes.drop && trans.accepted === null && !trans.closed && !trans.cancelled ? (
+                                <div className="btn-group">
+                                  <button onClick={() => acceptTransaction(trans._id)} className="btn btn-sm btn-success">
+                                    Aceptar intercambio
+                                  </button>
+                                  <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
+                                    Cancelar intercambio
+                                  </button>
+                                </div>
+                              ) : (
+                                trans.accepted && (
+                                  <div className="btn-group">
+                                    <button onClick={() => openChat(trans._id)} className="btn btn-sm btn-warning">
+                                      Abrir chat
+                                    </button>
+                                    <button onClick={() => closeTransaction(trans._id)} className="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#rateModal" type="button">
+                                      Intercambio finalizado
+                                    </button>
+                                    <button onClick={() => cancelTransaction(trans._id)} className="btn btn-sm btn-danger">
+                                      Cancelar intercambio
+                                    </button>
+                                  </div>
+                                )
+                              )}
+                              {!trans.accepted && trans.closed && user.id === trans.from._id ? (
+                                <>
+                                  {trans.userRates.recipiant.rate ? (
+                                    <div>No hay acciones disponibles</div>
+                                  ) : (
+                                    <button
+                                      onClick={() => {
+                                        setTransaction(trans);
+                                      }}
+                                      className="btn btn-sm btn-warning"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#rateModal"
+                                      type="button"
+                                    >
+                                      Calificar intercambio
+                                    </button>
+                                  )}
+                                </>
+                              ) : !trans.accepted && trans.closed && user.id === trans.to._id ? (
+                                <>
+                                  {trans.userRates.offerer?.rate ? (
+                                    <div>No hay acciones disponibles</div>
+                                  ) : (
+                                    <button
+                                      onClick={() => {
+                                        setTransaction(trans);
+                                      }}
+                                      className="btn btn-sm btn-warning"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#rateModal"
+                                      type="button"
+                                    >
+                                      Calificar intercambio
+                                    </button>
+                                  )}
+                                </>
+                              ) : (
+                                <div>No hay acciones disponibles</div>
+                              )}
+                            </td>
+                          </tr>
+                          {(trans.userRates.recipiant.rate || trans.userRates.offerer.rate) && (
+                            <>
+                              <tr>
+                                <th scope="row" className="px-4">
+                                  Calificacion recibida
+                                </th>
+                                <td>
+                                  {user.id === trans.from._id && trans.userRates.offerer.rate ? (
+                                    <>
+                                      {[1, 2, 3, 4, 5].map((num) => {
+                                        return trans.userRates.offerer.rate >= num ? (
+                                          <span key={num} className="star on fs-2">
+                                            &#9733;
+                                          </span>
+                                        ) : (
+                                          <span key={num} className="star off fs-2">
+                                            &#9733;
+                                          </span>
+                                        );
+                                      })}
+                                      {trans.userRates.offerer.value ? (
+                                        <div>{trans.userRates.offerer.value}</div>
+                                      ) : (
+                                        <small className="d-block">{trans.to.username} no ha escrito una valoracion sobre ti.</small>
+                                      )}
+                                    </>
+                                  ) : user.id === trans.to._id && trans.userRates.recipiant.rate ? (
+                                    <>
+                                      {[1, 2, 3, 4, 5].map((num) => {
+                                        return trans.userRates.recipiant.rate >= num ? (
+                                          <span key={num} className="star on fs-2">
+                                            &#9733;
+                                          </span>
+                                        ) : (
+                                          <span key={num} className="star off fs-2">
+                                            &#9733;
+                                          </span>
+                                        );
+                                      })}
+                                      {trans.userRates.recipiant.value ? (
+                                        <div>{trans.userRates.recipiant.value}</div>
+                                      ) : (
+                                        <small className="d-block">{trans.from.username} no ha escrito una valoracion sobre ti.</small>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <div>Nada por aquí aun</div>
+                                  )}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row" className="px-4">
+                                  Calificacion otorgada
+                                </th>
+                                <td>
+                                  {user.id === trans.from._id && trans.userRates.recipiant.rate ? (
+                                    <>
+                                      {[1, 2, 3, 4, 5].map((num) => {
+                                        return trans.userRates.recipiant.rate >= num ? (
+                                          <span key={num} className="star on fs-2">
+                                            &#9733;
+                                          </span>
+                                        ) : (
+                                          <span key={num} className="star off fs-2">
+                                            &#9733;
+                                          </span>
+                                        );
+                                      })}
+                                      {trans.userRates.recipiant.value ? (
+                                        <div>{trans.userRates.recipiant.value}</div>
+                                      ) : (
+                                        <small className="d-block">No has escrito una valoracion sobre tu contraparte.</small>
+                                      )}
+                                    </>
+                                  ) : user.id === trans.to._id && trans.userRates.offerer.rate ? (
+                                    <>
+                                      {[1, 2, 3, 4, 5].map((num) => {
+                                        return trans.userRates.offerer.rate >= num ? (
+                                          <span key={num} className="star on fs-2">
+                                            &#9733;
+                                          </span>
+                                        ) : (
+                                          <span key={num} className="star off fs-2">
+                                            &#9733;
+                                          </span>
+                                        );
+                                      })}
+                                      {trans.userRates.offerer.value ? (
+                                        <div>{trans.userRates.offerer.value}</div>
+                                      ) : (
+                                        <small className="d-block">No has escrito una valoracion sobre tu contraparte.</small>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <div>Nada por aquí aun</div>
+                                  )}
+                                </td>
+                              </tr>
+                            </>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </>
+          )}
         </section>
       </div>
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -679,8 +690,8 @@ const UserTransactions = () => {
                           <textarea
                             rows="3"
                             className="form-control"
-                            name="valoration"
-                            id="valoration"
+                            name="value"
+                            id="value"
                             value={value}
                             placeholder="Si lo deseas puedes dejar un comentario además de la puntuación..."
                             onChange={handleInputChange}

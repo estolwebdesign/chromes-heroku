@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import Router from "./Router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./App.css";
-import { useContext, useEffect, useState } from "react";
-import { API, PRODUCTION_API } from "./Global";
+import { useEffect, useState } from "react";
+import { API } from "./Global";
 import UserContext from "./Context/UserContext";
 import Swal from "sweetalert2";
 
@@ -43,7 +42,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <div className="App">
+      <div className="App d-flex flex-column min-vh-100">
         <Router />
       </div>
     </UserContext.Provider>
