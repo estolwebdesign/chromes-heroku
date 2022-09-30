@@ -55,7 +55,7 @@ const Header = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-qatar fixed-top" style={{ zIndex: "1100" }}>
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="chromeswap" height="60px" />
+          <img src={logo} alt="chromeswap" style={{height: "2rem"}} />
         </Link>
         <button
           className="navbar-toggler"
