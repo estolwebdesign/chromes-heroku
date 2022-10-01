@@ -174,7 +174,7 @@ exports.userController = {
 
   getNearestUsers: async (req, res) => {
     try {
-      const mainUser = await User.findById(req.params.id);
+      const mainUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
       const users = await User.find({}, "username repeated location transactions").populate([
         {

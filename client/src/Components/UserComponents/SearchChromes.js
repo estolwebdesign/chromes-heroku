@@ -25,7 +25,7 @@ const SearchChromes = () => {
   }, []);
 
   useEffect(() => {
-    if (latitude && longitude && user.id) {
+    if (latitude && longitude && user?.id) {
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
@@ -33,12 +33,10 @@ const SearchChromes = () => {
 
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(body),
       };
 
-      fetch(`${API}/auth/check-signed/${user.id}`, requestOptions)
+      fetch(`${API}/auth/check-signed/`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           if (data.id) {
@@ -62,10 +60,18 @@ const SearchChromes = () => {
   }, [latitude, longitude, setUser]);
 
   useEffect(() => {
-    if (user) {
+    if (latitude && longitude && user?.id) {
+      
+      const body = {
+        lat: latitude.toString(),
+        lng: longitude.toString(),
+      };
+
       const requestOptions = {
         method: "POST",
         credentials: "include",
+        headers: { "Content-Type": "application/json" },        
+        body: JSON.stringify(body),
       };
 
       fetch(`${API}/users/get-nearest/${user.id}/20000`, requestOptions)
@@ -84,7 +90,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [user, setUser, navigate]);
+  }, [user, setUser, navigate, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
