@@ -16,7 +16,7 @@ module.exports = function (app) {
 
   app.post("/api/auth/sign-up", controller.signUp);
   app.post("/api/auth/sign-in", controller.signIn);
-  app.post("/api/auth/check-signed", [authJwt.verifyToken, authJwt.isUser], controller.sendUser);
+  app.post("/api/auth/check-signed/:id?", [authJwt.verifyToken, authJwt.isUser], controller.sendUser);
   app.post("/api/auth/sign-out", [authJwt.verifyToken, authJwt.isUser], controller.logout);
   app.post("/api/auth/forgot-password", controller.passwordResetToken);
   app.post("/api/auth/validate-token/:token", controller.validResetToken);

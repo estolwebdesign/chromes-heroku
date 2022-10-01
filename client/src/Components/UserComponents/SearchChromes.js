@@ -25,7 +25,7 @@ const SearchChromes = () => {
   }, []);
 
   useEffect(() => {
-    if (latitude && longitude) {
+    if (latitude && longitude && user) {
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
@@ -38,7 +38,7 @@ const SearchChromes = () => {
         body: JSON.stringify(body),
       };
 
-      fetch(`${API}/auth/check-signed`, requestOptions)
+      fetch(`${API}/auth/check-signed/${user.id}`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           if (data.id) {
@@ -68,7 +68,7 @@ const SearchChromes = () => {
         credentials: "include",
       };
 
-      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
+      fetch(`${API}/users/get-nearest/${user.id}/20000`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setUsers(data.users);
