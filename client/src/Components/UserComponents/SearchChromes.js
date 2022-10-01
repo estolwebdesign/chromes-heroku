@@ -25,7 +25,7 @@ const SearchChromes = () => {
   }, []);
 
   useEffect(() => {
-    if (latitude && longitude && user) {
+    if (latitude && longitude && user.id) {
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
