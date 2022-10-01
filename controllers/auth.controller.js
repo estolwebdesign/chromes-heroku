@@ -247,6 +247,7 @@ exports.authController = {
 
   sendUser: async (req, res) => {
     try {
+      console.log(req.body);
       await User.findByIdAndUpdate(req.userId, { location: req.body.location });
       User.findById(req.userId)
         .populate("roles", "-__v")
