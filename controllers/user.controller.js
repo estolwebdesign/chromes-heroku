@@ -197,6 +197,7 @@ exports.userController = {
       const nearest = [];
 
       users.map((user, i) => {
+        console.log([user]);
         if (user._id != req.params.id && user.location.lat) {
           const distance = geolib.getDistance(
             {
@@ -212,7 +213,6 @@ exports.userController = {
           if (distance < req.params.distance) {
             const rates = [];
             user.transactions.map((trans, i) => {
-              console.log([trans, user]);
               return trans.from.toString() === user._id.toString() && trans.userRates.offerer.rate
                 ? rates.push(trans.userRates.offerer.rate)
                 : trans.to.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
