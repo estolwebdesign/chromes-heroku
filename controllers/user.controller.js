@@ -213,9 +213,9 @@ exports.userController = {
           if (distance < req.params.distance) {
             const rates = [];
             user.transactions.map((trans, i) => {
-              return trans.from.toString() === user._id.toString() && trans.userRates.offerer.rate
+              return trans.from?.toString() === user._id.toString() && trans.userRates.offerer.rate
                 ? rates.push(trans.userRates.offerer.rate)
-                : trans.to.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
+                : trans.to?.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
             });
             const rating = rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
             nearest.push({
