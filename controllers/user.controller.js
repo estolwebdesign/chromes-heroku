@@ -198,7 +198,7 @@ exports.userController = {
 
       users.map((user, i) => {
         if (user._id != req.params.id && user.location.lat) {
-          console.log([mainUser.location, user.location]);
+          console.log(mainUser);
           const distance = geolib.getDistance(
             {
               lat: mainUser.location.lat,
