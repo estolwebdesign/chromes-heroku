@@ -26,10 +26,6 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (latitude && longitude && user?.id) {
-      const body = {
-        lat: latitude.toString(),
-        lng: longitude.toString(),
-      };
 
       const requestOptions = {
         method: "POST",
@@ -57,7 +53,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [latitude, longitude, setUser]);
+  }, [latitude, longitude, setUser, user]);
 
   useEffect(() => {
     if (latitude && longitude && user?.id) {
