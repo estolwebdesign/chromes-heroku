@@ -76,7 +76,7 @@ const SearchChromes = () => {
           setUsers(data.users);
         })
         .catch((err) => {
-          setUser(null);
+          // setUser(null);
           console.error(err);
         });
     }
