@@ -19,8 +19,8 @@ const User = model(
       ],
       transactions: [{ type: ObjectId, ref: "Transaction" }],
       location: {
-        lat: { type: Number },
-        lng: { type: Number },
+        lat: { type: Number, default: null },
+        lng: { type: Number, default: null },
       },
     },
     {
