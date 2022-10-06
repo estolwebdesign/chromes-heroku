@@ -54,7 +54,7 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromeswap.herokuapp.com', 'https://8080-cs-520734283367-default.cs-us-east1-pkhd.cloudshell.dev/']
+const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromeswap.herokuapp.com', 'https://8080-cs-520734283367-default.cs-us-east1-pkhd.cloudshell.dev']
 
 var corsOptions = {
   origin: function (origin, callback) {
