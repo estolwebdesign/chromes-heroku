@@ -197,36 +197,35 @@ exports.userController = {
       const nearest = [];
 
       users.map((user, i) => {
-        console.log([user]);
         if (user._id != req.params.id && user.location.lat) {
-          const distance = geolib.getDistance(
-            {
-              lat: mainUser.location.lat,
-              lng: mainUser.location.lng,
-            },
-            {
-              lat: user.location.lat,
-              lng: user.location.lng,
-            }
-          );
+          // const distance = geolib.getDistance(
+          //   {
+          //     lat: mainUser.location.lat,
+          //     lng: mainUser.location.lng,
+          //   },
+          //   {
+          //     lat: user.location.lat,
+          //     lng: user.location.lng,
+          //   }
+          // );
 
-          if (distance < req.params.distance) {
-            const rates = [];
-            user.transactions.map((trans, i) => {
-              return trans.from?.toString() === user._id.toString() && trans.userRates.offerer.rate
-                ? rates.push(trans.userRates.offerer.rate)
-                : trans.to?.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
-            });
-            const rating = rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
+          // if (distance < req.params.distance) {
+          //   const rates = [];
+          //   user.transactions.map((trans, i) => {
+          //     return trans.from.toString() === user._id.toString() && trans.userRates.offerer.rate
+          //       ? rates.push(trans.userRates.offerer.rate)
+          //       : trans.to.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
+          //   });
+          //   const rating = rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
             nearest.push({
               _id: user._id,
               username: user.username,
               repeated: user.repeated,
-              distance: distance,
-              rating: rating,
+              distance: 5000,
+              rating: 5,
               transactions: user.transactions.length,
             });
-          }
+          // }
         }
 
         return;
