@@ -174,12 +174,14 @@ exports.userController = {
 
   getNearestUsers: async (req, res) => {
     try {
-      const mainUser = await User.findByIdAndUpdate(req.params.id, {
+      await User.findByIdAndUpdate(req.params.id, {
         location: {
           lat: req.body.lat,
           lng: req.body.lng,
         }
-      }, {new: true});
+      });
+
+      const mainUser = User.findById(req.params.id);
 
       const users = await User.find({}, "username repeated location transactions").populate([
         {
@@ -198,7 +200,7 @@ exports.userController = {
 
       users.map((user, i) => {
         if (user._id != req.params.id && user.location.lat) {
-          console.log(mainUser);
+          console.log(mainUser.location);
           const distance = geolib.getDistance(
             {
               lat: mainUser.location.lat,
