@@ -174,14 +174,12 @@ exports.userController = {
 
   getNearestUsers: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(req.params.id, {
+      const mainUser = await User.findByIdAndUpdate(req.params.id, {
         location: {
           lat: req.body.lat,
           lng: req.body.lng,
         }
-      });
-
-      const mainUser = User.findById(req.params.id);
+      }, {new: true});
 
       const users = await User.find({}, "username repeated location transactions").populate([
         {
@@ -200,7 +198,6 @@ exports.userController = {
 
       users.map((user, i) => {
         if (user._id != req.params.id && user.location.lat) {
-          console.log(mainUser);
           const distance = geolib.getDistance(
             {
               lat: mainUser.location.lat,
@@ -239,7 +236,7 @@ exports.userController = {
         users: nearest,
       });
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
       return res.status(500).json({
         status: "error",
         message: err.message,
