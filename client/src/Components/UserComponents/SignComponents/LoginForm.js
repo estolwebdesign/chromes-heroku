@@ -35,7 +35,6 @@ const LoginForm = ({ setAction }) => {
 
     fetch(`${API}/auth/sign-in`, requestOptions)
       .then(async (res) => {
-        console.log(res);
         const data = await res.json();
         if (data.message === "User Not found.") {
           Swal.fire("Error", `No existe usuario registrado con el email "${logEmail}".`, "error");
