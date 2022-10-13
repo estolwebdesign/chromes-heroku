@@ -55,7 +55,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [user, setUser, navigate, latitude, longitude]);
+  }, [latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
