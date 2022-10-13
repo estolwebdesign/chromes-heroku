@@ -8,6 +8,7 @@ import Transaction from "./Components/AdminComponents/Transaction";
 import Transactions from "./Components/AdminComponents/Transactions";
 import User from "./Components/AdminComponents/User";
 import Users from "./Components/AdminComponents/Users";
+import Contact from "./Components/Contact";
 import Error from "./Components/Layouts/Error";
 import Footer from "./Components/Layouts/Footer";
 import Header from "./Components/Layouts/Header";
@@ -25,6 +26,7 @@ const Router = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<UserDashboard />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/my-chromes" element={<UserChromes />} />
         <Route path="/my-transactions" element={<UserTransactions />} />
         <Route path="/search-chromes" element={<SearchChromes />} />

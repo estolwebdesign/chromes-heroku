@@ -52,10 +52,13 @@ const Header = () => {
   }, [winWidth]);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-qatar fixed-top" style={{ zIndex: "1100" }}>
+    <nav
+      className="navbar navbar-expand-lg navbar-dark bg-qatar fixed-top"
+      style={{ zIndex: "1100" }}
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="chromeswap" style={{height: "2rem"}} />
+          <img src={logo} alt="chromeswap" style={{ height: "2rem" }} />
         </Link>
         <button
           className="navbar-toggler"
@@ -69,12 +72,25 @@ const Header = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className={winWidth > 991 ? "navbar-collapse collapse" : `navbar-collapse ${isCollapsed === false ? "show" : ""} ${isCollapsing === true ? "collapsing" : "collapse"}`} id="navbarNav">
+        <div
+          className={
+            winWidth > 991
+              ? "navbar-collapse collapse"
+              : `navbar-collapse ${isCollapsed === false ? "show" : ""} ${
+                  isCollapsing === true ? "collapsing" : "collapse"
+                }`
+          }
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto">
             {!user ? (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/sign" onClick={handleNavbarToggle}>
+                  <NavLink
+                    className="nav-link"
+                    to="/sign"
+                    onClick={handleNavbarToggle}
+                  >
                     Ingresar
                   </NavLink>
                 </li>
@@ -82,23 +98,39 @@ const Header = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/search-chromes" onClick={handleNavbarToggle}>
+                  <NavLink
+                    className="nav-link"
+                    to="/search-chromes"
+                    onClick={handleNavbarToggle}
+                  >
                     Buscar figuritas
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/my-chromes" onClick={handleNavbarToggle}>
+                  <NavLink
+                    className="nav-link"
+                    to="/my-chromes"
+                    onClick={handleNavbarToggle}
+                  >
                     Mis figuritas
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/my-transactions" onClick={handleNavbarToggle}>
+                  <NavLink
+                    className="nav-link"
+                    to="/my-transactions"
+                    onClick={handleNavbarToggle}
+                  >
                     Mis intercambios
                   </NavLink>
                 </li>
                 {user.roles[0] === "ROLE_ADMIN" && (
                   <li className="nav-item">
-                    <NavLink className="nav-link" to="admin" onClick={handleNavbarToggle}>
+                    <NavLink
+                      className="nav-link"
+                      to="admin"
+                      onClick={handleNavbarToggle}
+                    >
                       Administrar
                     </NavLink>
                   </li>
@@ -117,6 +149,15 @@ const Header = () => {
                 </li>
               </>
             )}
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                to="/contact"
+                onClick={handleNavbarToggle}
+              >
+                Contacto
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
