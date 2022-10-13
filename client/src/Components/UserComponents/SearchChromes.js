@@ -45,7 +45,7 @@ const SearchChromes = () => {
           setUsers(data.users);
         })
         .catch((err) => {
-          // setUser(null);
+          setUser(null);
           console.error(err);
         });
     }
@@ -55,7 +55,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [user, setUser, navigate, latitude, longitude]);
+  }, [user, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
