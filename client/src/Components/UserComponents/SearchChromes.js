@@ -26,37 +26,6 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (latitude && longitude && user?.id) {
-
-      const requestOptions = {
-        method: "POST",
-        credentials: "include",
-      };
-
-      fetch(`${API}/auth/check-signed/`, requestOptions)
-        .then(async (res) => {
-          const data = await res.json();
-          if (data.id) {
-            setUser(data);
-          }
-          if (data.message === "jwt expired") {
-            setUser(null);
-            Swal.fire({
-              title: "Su sesión ha expirado",
-              icon: "warning",
-            });
-          }
-        })
-        .catch((err) => {
-          setUser(null);
-          console.error(err);
-        });
-    }
-
-    return () => {};
-  }, [latitude, longitude, setUser, user]);
-
-  useEffect(() => {
-    if (latitude && longitude && user?.id) {
       
       const body = {
         lat: latitude.toString(),
