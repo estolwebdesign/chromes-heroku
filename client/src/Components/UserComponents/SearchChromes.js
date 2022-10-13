@@ -25,7 +25,7 @@ const SearchChromes = () => {
   }, []);
 
   useEffect(() => {
-    if (latitude && longitude && user?.id) {
+    if (latitude && longitude && user.id) {
       
       const body = {
         lat: latitude.toString(),
@@ -54,7 +54,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [user, latitude, longitude]);
+  }, [user.id, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
