@@ -55,7 +55,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
-  }, [user, latitude, longitude]);
+  }, [user, setUser, navigate, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
@@ -89,13 +89,13 @@ const SearchChromes = () => {
   };
 
   useEffect(() => {
-    if (users?.length > 1) {
+    if (users?.length > 1 && !sorted) {
       users.sort((a, b) => (a.distance > b.distance ? 1 : -1));
       setSorted(true);
     }
 
     return () => {};
-  }, [users]);
+  }, [users, sorted]);
 
   return (
     <main className="mb-5">
