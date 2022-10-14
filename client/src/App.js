@@ -1,6 +1,7 @@
 import Router from "./Router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
+import 'animate.css';
 import "./App.css";
 import { useEffect, useState } from "react";
 import { API } from "./Global";
