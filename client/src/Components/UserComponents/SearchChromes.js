@@ -39,7 +39,7 @@ const SearchChromes = () => {
         body: JSON.stringify(body),
       };
 
-      fetch(`${API}/users/get-nearest/${user.id}/20000`, requestOptions)
+      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setUsers(data.users);
