@@ -25,7 +25,11 @@ exports.userController = {
         let exists = false;
         for (let i = 0; i < user.repeated.length; i++) {
           if (user.repeated[i].chrome == req.params.chromeId) {
-            await User.findByIdAndUpdate(req.params.userId, { $inc: { "repeated.$[index].quantity": 1 } }, { arrayFilters: [{ "index.chrome": req.params.chromeId }] });
+            await User.findByIdAndUpdate(
+              req.params.userId,
+              { $inc: { "repeated.$[index].quantity": 1 } },
+              { arrayFilters: [{ "index.chrome": req.params.chromeId }] }
+            );
             exists = true;
           }
         }
@@ -40,7 +44,9 @@ exports.userController = {
           });
         }
       } else {
-        await User.findByIdAndUpdate(req.params.userId, { $push: { chromes: req.params.chromeId } });
+        await User.findByIdAndUpdate(req.params.userId, {
+          $push: { chromes: req.params.chromeId },
+        });
       }
       const updatedUser = await User.findById(req.params.userId, "-password");
       return res.status(200).json({
@@ -74,9 +80,15 @@ exports.userController = {
       }
       for (let i = 0; i < user.repeated.length; i++) {
         if (user.repeated[i].chrome == req.params.chromeId) {
-          const updated = await User.findByIdAndUpdate(req.params.userId, { $inc: { "repeated.$[index].quantity": -1 } }, { arrayFilters: [{ "index.chrome": req.params.chromeId }] });
+          const updated = await User.findByIdAndUpdate(
+            req.params.userId,
+            { $inc: { "repeated.$[index].quantity": -1 } },
+            { arrayFilters: [{ "index.chrome": req.params.chromeId }] }
+          );
           if (updated.repeated[i].quantity === 1) {
-            await User.findByIdAndUpdate(req.params.userId, { $pull: { repeated: { chrome: req.params.chromeId } } });
+            await User.findByIdAndUpdate(req.params.userId, {
+              $pull: { repeated: { chrome: req.params.chromeId } },
+            });
           }
         }
       }
@@ -159,7 +171,9 @@ exports.userController = {
 
   setLocation: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(req.params.id, { location: { lat: req.body.lat, lng: req.body.lng } });
+      await User.findByIdAndUpdate(req.params.id, {
+        location: { lat: req.body.lat, lng: req.body.lng },
+      });
       return res.status(200).json({
         status: "success",
         message: "user's location updated",
@@ -174,14 +188,21 @@ exports.userController = {
 
   getNearestUsers: async (req, res) => {
     try {
-      const mainUser = await User.findByIdAndUpdate(req.params.id, {
-        location: {
-          lat: req.body.lat,
-          lng: req.body.lng,
-        }
-      }, {new: true});
+      const mainUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          location: {
+            lat: req.body.lat,
+            lng: req.body.lng,
+          },
+        },
+        { new: true }
+      );
 
-      const users = await User.find({}, "username repeated location transactions").populate([
+      const users = await User.find(
+        {},
+        "username repeated location transactions"
+      ).populate([
         {
           path: "repeated",
           populate: {
@@ -208,15 +229,19 @@ exports.userController = {
               lng: user.location.lng,
             }
           );
-
+          console.log(distance);
           if (distance < req.params.distance) {
             const rates = [];
             user.transactions.map((trans, i) => {
-              return trans.from.toString() === user._id.toString() && trans.userRates.offerer.rate
+              return trans.from.toString() === user._id.toString() &&
+                trans.userRates.offerer.rate
                 ? rates.push(trans.userRates.offerer.rate)
-                : trans.to.toString() === user._id.toString() && trans.userRates.recipiant.rate && rates.push(trans.userRates.recipiant.rate);
+                : trans.to.toString() === user._id.toString() &&
+                    trans.userRates.recipiant.rate &&
+                    rates.push(trans.userRates.recipiant.rate);
             });
-            const rating = rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
+            const rating =
+              rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
             nearest.push({
               _id: user._id,
               username: user.username,

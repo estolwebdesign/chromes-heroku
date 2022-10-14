@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../../Global";
 import useForm from "../../../Hooks/useForm";
 
 const RegisterForm = ({ setAction }) => {
-  const navigate = useNavigate();
   const [clicked, setClicked] = useState(false);
 
   const [registerForm, registerFormChange] = useForm({
