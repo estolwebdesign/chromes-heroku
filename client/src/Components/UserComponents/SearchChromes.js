@@ -8,7 +8,7 @@ import { API } from "../../Global";
 import Loader from "../Layouts/Loader";
 
 const SearchChromes = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [users, setUsers] = useState();
   const [sorted, setSorted] = useState(false);
   const navigate = useNavigate();
@@ -54,6 +54,7 @@ const SearchChromes = () => {
     }
 
     return () => {};
+    // eslint-disable-next-line
   }, [user.id, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
