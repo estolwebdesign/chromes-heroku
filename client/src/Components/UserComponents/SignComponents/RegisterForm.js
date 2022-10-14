@@ -36,8 +36,8 @@ const RegisterForm = ({ setAction }) => {
 
     fetch(`${API}/auth/sign-up`, requestOptions)
       .then(async (res) => {
-        Swal.fire("Registrado!!", "Te has registrado sactisfactoriamente", "success");
-        navigate("/sign");
+        Swal.fire("Registrado!!", "Te has registrado sactisfactoriamente, ya puedes ingresar con tu correo electrónico y contraseña", "success");
+        setAction("log");
       })
       .catch((err) => {
         setClicked(false);
