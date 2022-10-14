@@ -89,13 +89,13 @@ const SearchChromes = () => {
   };
 
   useEffect(() => {
-    if (users?.length > 1 && !sorted) {
+    if (users?.length > 0 && !sorted) {
       users.sort((a, b) => (a.distance > b.distance ? 1 : -1));
       setSorted(true);
     }
 
     return () => {};
-  }, [users, sorted]);
+  }, [users]);
 
   return (
     <main className="mb-5">
