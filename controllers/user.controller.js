@@ -255,8 +255,6 @@ exports.userController = {
         return;
       });
 
-      console.log(mainUser, nearest);
-
       return res.status(200).json({
         status: "success",
         users: nearest,
