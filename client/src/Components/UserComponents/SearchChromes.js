@@ -94,11 +94,12 @@ const SearchChromes = () => {
     }
     if (users?.length === 1 && !sorted) {
       setSorted(true);
-      console.log(users);
     }
 
     return () => {};
   }, [users, sorted]);
+
+  console.log(users);
 
   return (
     <main className="mb-5">
