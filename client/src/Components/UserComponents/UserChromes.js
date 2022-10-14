@@ -119,7 +119,7 @@ const UserChromes = () => {
                     <hr className="text-light mt-3 w-100 position-absolute" style={{ borderTop: "4px solid #f8f9fa" }} />
                     <h3 className="text-center bg-light px-5 rounded-pill mx-auto fw-bold text-qatar">FWC</h3>
                   </div>
-                  {chromes?.filter(chrome => chrome.section === "FWC").sort((a, b) => a.name > b.name ? 1 : -1).map((chrome, i) => {
+                  {chromes?.map((chrome, i) => {
                     return (
                       i < 19 && (
                         <div key={i} className="col-lg-2 col-md-3 col-6">
@@ -309,9 +309,9 @@ const UserChromes = () => {
                       FWC <small>(segunda parte)</small>
                     </h3>
                   </div>
-                  {chromes?.filter(chrome => chrome.section === "FWC").sort((a, b) => a.name > b.name ? 1 : -1).map((chrome, i) => {
+                  {chromes?.map((chrome, i) => {
                     return (
-                      i > 18 && (
+                      i > 626 && (
                         <div key={chrome._id} className="col-lg-2 col-md-3 col-6">
                           <article className={`bg-secondary mx-auto rounded ${userChromes?.includes(chrome._id) ? "bg-success" : "bg-danger"}`} style={{ height: "200px", width: "133px" }}>
                             {userChromes?.includes(chrome._id) ? (

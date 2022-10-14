@@ -48,7 +48,7 @@ exports.chromesController = {
 
   getAll: async (req, res) => {
     try {
-      const allChromes = await Chrome.find();
+      const allChromes = await Chrome.find().sort;
       if (!allChromes || allChromes.length < 1) {
         return res.status(404).json({
           status: "error",

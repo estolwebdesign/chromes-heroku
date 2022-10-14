@@ -20,9 +20,7 @@ const Chromes = () => {
         setChromes(data.chromes);
       })
       .catch((err) => {
-        if (err.request.status === 404) {
           setChromes([]);
-        }
         console.error(err);
       });
 
