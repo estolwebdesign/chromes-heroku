@@ -92,12 +92,13 @@ const SearchChromes = () => {
       users.sort((a, b) => (a.distance > b.distance ? 1 : -1));
       setSorted(true);
     }
-    if (users?.length === 1) {
+    if (users?.length === 1 && !sorted) {
       setSorted(true);
+      console.log(users);
     }
 
     return () => {};
-  }, [users]);
+  }, [users, sorted]);
 
   return (
     <main className="mb-5">
