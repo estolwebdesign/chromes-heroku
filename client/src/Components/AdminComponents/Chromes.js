@@ -67,6 +67,18 @@ const Chromes = () => {
                 PANEL ADMINISTRADOR
               </h1>
             </div>
+            <div className="text-end">
+              <button
+                onClick={handleAddChromes}
+                className="btn btn-success fw-bold rounded-circle shadow"
+              >
+                +
+              </button>
+            </div>
+            <div className="text-center">
+              <h3 className="fw-bold">#404</h3>
+              <h3>No hay figuritas registradas</h3>
+            </div>
             {!chromes ? (
               <div className="text-center">
                 <div className="lds-grid">
@@ -83,39 +95,22 @@ const Chromes = () => {
               </div>
             ) : (
               <>
-                {chromes.length < 1 ? (
-                  <>
-                    <div className="text-end">
-                      <button
-                        onClick={handleAddChromes}
-                        className="btn btn-success fw-bold rounded-circle shadow"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <div className="text-center">
-                      <h3 className="fw-bold">#404</h3>
-                      <h3>No hay figuritas registradas</h3>
-                    </div>
-                  </>
-                ) : (
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Identificador</th>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Identificador</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {chromes.map((chrome, i) => (
+                      <tr key={i}>
+                        <th scope="row">{i + 1}</th>
+                        <td>{chrome.name}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {chromes.map((chrome, i) => (
-                        <tr key={i}>
-                          <th scope="row">{i + 1}</th>
-                          <td>{chrome.name}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
+                    ))}
+                  </tbody>
+                </table>
               </>
             )}
           </div>
