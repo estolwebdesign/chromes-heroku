@@ -54,7 +54,7 @@ const SearchChromes = () => {
 
     return () => {};
     // eslint-disable-next-line
-  }, [user.id, latitude, longitude]);
+  }, [user?.id, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
     const body = {
@@ -98,8 +98,6 @@ const SearchChromes = () => {
 
     return () => {};
   }, [users, sorted]);
-
-  console.log(users);
 
   return (
     <main className="mb-5">
