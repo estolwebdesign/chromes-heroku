@@ -229,7 +229,7 @@ exports.userController = {
               lng: user.location.lng,
             }
           );
-          console.log(distance);
+          console.log(user, distance);
           if (distance < req.params.distance) {
             const rates = [];
             user.transactions.map((trans, i) => {
