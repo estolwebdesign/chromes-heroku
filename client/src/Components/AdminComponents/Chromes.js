@@ -20,12 +20,14 @@ const Chromes = () => {
         setChromes(data.chromes);
       })
       .catch((err) => {
-          setChromes([]);
+        setChromes([]);
         console.error(err);
       });
 
     return () => {};
   }, []);
+
+  console.log(chromes);
 
   useEffect(() => {
     if (user?.roles[0] === "ROLE_ADMIN") {
@@ -54,8 +56,14 @@ const Chromes = () => {
         <main>
           <div className="container bg-light rounded shadow mt-3 p-3">
             <div className="d-flex flex-column position-relative w-100">
-              <hr className="text-light mt-4 w-100 position-absolute" style={{ borderTop: "4px solid #5c0931" }} />
-              <h1 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light" style={{ zIndex: "1050" }}>
+              <hr
+                className="text-light mt-4 w-100 position-absolute"
+                style={{ borderTop: "4px solid #5c0931" }}
+              />
+              <h1
+                className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light"
+                style={{ zIndex: "1050" }}
+              >
                 PANEL ADMINISTRADOR
               </h1>
             </div>
@@ -78,7 +86,10 @@ const Chromes = () => {
                 {chromes.length < 1 ? (
                   <>
                     <div className="text-end">
-                      <button onClick={handleAddChromes} className="btn btn-success fw-bold rounded-circle shadow">
+                      <button
+                        onClick={handleAddChromes}
+                        className="btn btn-success fw-bold rounded-circle shadow"
+                      >
                         +
                       </button>
                     </div>
