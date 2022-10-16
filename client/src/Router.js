@@ -17,7 +17,6 @@ import ResetPassword from "./Components/UserComponents/ResetPassword";
 import SearchChromes from "./Components/UserComponents/SearchChromes";
 import Sign from "./Components/UserComponents/Sign";
 import UserChromes from "./Components/UserComponents/UserChromes";
-import UserDashboard from "./Components/UserComponents/UserDashboard";
 import UserTransactions from "./Components/UserComponents/UserTransactions";
 import UserContext from "./Context/UserContext";
 
@@ -28,18 +27,10 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route
-          exact
-          path="/"
-          element={() => {
-            user ? <SearchChromes /> : <Sign />;
-          }}
-        />
+        <Route exact path="/" element={user?.id ? <SearchChromes /> : <Sign />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/my-chromes" element={<UserChromes />} />
         <Route path="/my-transactions" element={<UserTransactions />} />
-        <Route path="/search-chromes" element={<SearchChromes />} />
-        <Route path="/sign" element={<Sign />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 

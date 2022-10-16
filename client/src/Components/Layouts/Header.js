@@ -88,7 +88,7 @@ const Header = () => {
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
-                    to="/sign"
+                    to="/"
                     onClick={handleNavbarToggle}
                   >
                     Ingresar
@@ -100,7 +100,7 @@ const Header = () => {
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
-                    to="/search-chromes"
+                    to="/"
                     onClick={handleNavbarToggle}
                   >
                     Buscar figuritas
