@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // use SSL
   auth: {
-    user: "contact@estebanolivera.com",
+    user: "contact@chromesw.app",
     pass: "Rominola/1995",
   },
 });
@@ -50,7 +50,7 @@ exports.transactionsController = {
 
       const mailOptions = {
         to: transaction.to.email,
-        from: "new-transaction@estebanolivera.com",
+        from: "new-transaction@chromesw.app",
         subject: "Nueva solicitud de intercambio",
         html: newTransactionEmail(transaction),
       }

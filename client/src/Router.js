@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // COMPONENTS
@@ -19,13 +19,22 @@ import Sign from "./Components/UserComponents/Sign";
 import UserChromes from "./Components/UserComponents/UserChromes";
 import UserDashboard from "./Components/UserComponents/UserDashboard";
 import UserTransactions from "./Components/UserComponents/UserTransactions";
+import UserContext from "./Context/UserContext";
 
 const Router = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route exact path="/" element={<UserDashboard />} />
+        <Route
+          exact
+          path="/"
+          element={() => {
+            user ? <SearchChromes /> : <Sign />;
+          }}
+        />
         <Route path="/contact" element={<Contact />} />
         <Route path="/my-chromes" element={<UserChromes />} />
         <Route path="/my-transactions" element={<UserTransactions />} />
@@ -42,11 +51,10 @@ const Router = () => {
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/users/:id" element={<User />} />
 
-
         {/* error */}
         <Route path="*" element={<Error code={404} />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 };

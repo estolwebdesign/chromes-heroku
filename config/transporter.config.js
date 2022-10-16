@@ -5,7 +5,7 @@ exports.transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // use SSL
   auth: {
-    user: "contact@estebanolivera.com",
+    user: "contact@chromesw.app",
     pass: "Rominola/1995",
   },
 });

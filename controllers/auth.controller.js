@@ -200,13 +200,13 @@ exports.authController = {
         port: 465,
         secure: true, // use SSL
         auth: {
-          user: "contact@estebanolivera.com",
+          user: "contact@chromesw.app",
           pass: "Rominola/1995",
         },
       });
       var mailOptions = {
         to: user.email,
-        from: "password-reset@estebanolivera.com",
+        from: "password-reset@chromesw.app",
         subject: "Reseteo de contraseña",
         text:
           "Recibió este correo electrónico porque usted, u otra persona, ha solicitado el restablecimiento de la contraseña de su cuenta ChromeSwap.\n\n" +

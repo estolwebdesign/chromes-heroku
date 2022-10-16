@@ -20,7 +20,9 @@ const UserDashboard = () => {
   }, [user, navigate]);
 
   return (
-    <Loader />
+    <main className="mt-3">
+      <Loader />
+    </main>
   );
 };
 
