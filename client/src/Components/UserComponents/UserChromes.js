@@ -1,4 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { API, TEAMS } from "../../Global";
 import UserContext from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +11,7 @@ import Loader from "../Layouts/Loader";
 
 const UserChromes = () => {
   const [chromes, setChromes] = useState();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [userChromes, setUserChromes] = useState();
   const [repeatedChromes, setRepeatedChromes] = useState([]);
   const navigate = useNavigate();
@@ -60,6 +64,16 @@ const UserChromes = () => {
         const data = await res.json();
         setUserChromes(data.user.chromes);
         setRepeatedChromes(data.user.repeated);
+        setUser({
+          chromes: data.user.chromes,
+          email: user.email,
+          id: user.id,
+          location: user.location,
+          repeated: data.user.repeated,
+          roles: user.roles,
+          transactions: user.transactions,
+          username: user.username,
+        });
       })
       .catch((err) => {
         console.error(err);
