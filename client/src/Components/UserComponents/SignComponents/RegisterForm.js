@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 import { API } from "../../../Global";
 import useForm from "../../../Hooks/useForm";
 import ReCAPTCHA from "react-google-recaptcha";
+import { diff_years } from "../../../helpers/diff_years";
+import moment from "moment";
 
 const RegisterForm = ({ setAction }) => {
   const [clicked, setClicked] = useState(false);
@@ -14,19 +16,31 @@ const RegisterForm = ({ setAction }) => {
     email: "",
     password: "",
     passwordRepeat: "",
+    birth: "",
     location: {
       lat: "",
       lng: "",
     },
   });
 
-  const { name, email, password, passwordRepeat } = registerForm;
+  const { name, email, password, passwordRepeat, birth } = registerForm;
 
   const handleRegister = (e) => {
     e.preventDefault();
     if (!validCaptcha) {
       console.warn("Atención: captcha inválido");
     }
+
+    const age = diff_years(new Date(moment(birth).format("YYYY/MM/D")), new Date(moment().format("YYYY/MM/D")));
+
+    if (age < 18) {
+      return Swal.fire(
+        "Atención",
+        "Por tu seguridad, no puedes registrarte en ChromeSwapp porque eres menor de edad",
+        "info"
+      );
+    }
+
     setClicked(true);
 
     const body = registerForm;
@@ -111,6 +125,17 @@ const RegisterForm = ({ setAction }) => {
           name="passwordRepeat"
           id="passwordRepeat"
           value={passwordRepeat}
+          onChange={registerFormChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="birth">Fecha de nacimiento</label>
+        <input
+          type="date"
+          className="form-control"
+          name="birth"
+          id="birth"
+          value={birth}
           onChange={registerFormChange}
         />
       </div>
