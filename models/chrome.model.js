@@ -5,8 +5,9 @@ const Chrome = model(
   "Chrome",
   new Schema(
     {
-      section: {type: String, required: true},
-      name: {type: String, required: true},
+      number: { type: Number },
+      section: { type: String, required: true },
+      name: { type: String, required: true },
     },
     {
       timestamps: true,
