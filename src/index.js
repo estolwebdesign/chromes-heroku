@@ -54,7 +54,7 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromeswap.herokuapp.com', 'https://web-production-29fc.up.railway.app', 'https://chromeswapp.cyclic.app']
+const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromesw.app'];
 
 var corsOptions = {
   origin: function (origin, callback) {
