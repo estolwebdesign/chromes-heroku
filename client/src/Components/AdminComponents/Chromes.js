@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { API } from "../../Global";
 import UserContext from "../../Context/UserContext";
 import Error from "../Layouts/Error";
+import Swal from "sweetalert2";
 
 const Chromes = () => {
   const [chromes, setChromes] = useState();
@@ -45,9 +46,11 @@ const Chromes = () => {
       credentials: "include",
     };
 
-    fetch(`${API}/chromes/create-all`, requestOptions).catch((err) => {
-      console.error(err);
-    });
+    fetch(`${API}/chromes/create-all`, requestOptions)
+      .then((res) => Swal.fire("Exito!!", "Figuritas creadas", "success"))
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
