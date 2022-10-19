@@ -138,12 +138,12 @@ exports.chromesController = {
       const teamFlags = ["QAT", "ECU", "SEN", "NED", "ENG", "IRN", "USA", "WAL", "ARG", "KSA", "MEX", "POL", "FRA", "AUS", "DEN", "TUN", "ESP", "CRC", "GER", "JPN", "BEL", "CAN", "MAR", "CRO", "BRA", "SRB", "SUI", "CMR", "POR", "GHA", "URU", "KOR"];
       const teams = ["Qatar", "Ecuador", "Senegal", "Netherlands", "England", "Ir Irán", "USA", "Wales", "Argentina", "Saudi Arabia", "Mexico", "Poland", "France", "Australia", "Denmark", "Tunisia", "Spain", "Costa Rica", "Germany", "Japan", "Belgium", "Canada", "Morocco", "Croatia", "Brazil", "Serbia", "Switzerland", "Cameroon", "Portugal", "Ghana", "Uruguay", "Korea Republic"];
       chromes.push({
-        section: "FWC",
+        section: "FWC1",
         name: `00`,
       });
       for (let i = 1; i < 19; i++) {
         const chrome = {
-          section: "FWC",
+          section: "FWC1",
           name: `FWC ${i}`,
         };
         chromes.push(chrome);
@@ -151,6 +151,7 @@ exports.chromesController = {
       for (let team = 0; team < 32; team++) {
         for (let i = 1; i < 20; i++) {
           const chrome = {
+            number: 
             section: `${teams[team]}`,
             name: `${teamFlags[team]} ${i}` 
           };
@@ -159,7 +160,7 @@ exports.chromesController = {
       }
       for (let i = 19; i < 30; i++) {
         const chrome = {
-          section: "FWC",
+          section: "FWC2",
           name: `FWC ${i}`,
         };
         chromes.push(chrome);
