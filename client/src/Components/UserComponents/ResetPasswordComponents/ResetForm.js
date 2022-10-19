@@ -33,7 +33,7 @@ const ResetForm = ({ token }) => {
 
     fetch(`${API}/auth/set-new-password/${token}`, requestOptions)
       .then(async (res) => {
-        Swal.fire("Contraseña reseteada", "El proceso de cambio de contraseña ha sido exitoso, ya puedes ingresar nuevamente a tu cuenta de ChromeSwap", "success");
+        Swal.fire("Contraseña reseteada", "El proceso de cambio de contraseña ha sido exitoso, ya puedes ingresar nuevamente a tu cuenta de ChromeSwapp", "success");
         navigate("/sign");
       })
       .catch((err) => {

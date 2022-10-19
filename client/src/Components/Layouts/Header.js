@@ -58,7 +58,7 @@ const Header = () => {
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="chromeswap" style={{ height: "2rem" }} />
+          <img src={logo} alt="chromeswapp" style={{ height: "2rem" }} />
         </Link>
         <button
           className="navbar-toggler"

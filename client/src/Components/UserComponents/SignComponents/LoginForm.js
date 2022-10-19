@@ -41,7 +41,7 @@ const LoginForm = ({ setAction }) => {
           return console.warn(data.message);
         }
         localStorage.setItem("user", JSON.stringify(data));
-        Swal.fire("Estas dentro!!", "Has iniciado sesión satisfactoriamente en tu cuenta de ChromeSwap. A intercambiar figuritas!!", "success");
+        Swal.fire("Estas dentro!!", "Has iniciado sesión satisfactoriamente en tu cuenta de ChromeSwapp. A intercambiar figuritas!!", "success");
         navigate("/");
         setUser(data);
       })
