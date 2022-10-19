@@ -79,7 +79,7 @@ const LoginForm = ({ setAction }) => {
       </div>
       <div className="text-center border p-2 rounded mt-3">
         <h5>¿Aún no estás registrado?</h5>
-        <button onClick={() => setAction("register")} className="btn btn-qatar w-100">
+        <button onClick={() => setAction("register")} className="btn btn-qatar-lg fw-bold w-100">
           Regístrate aquí
         </button>
       </div>

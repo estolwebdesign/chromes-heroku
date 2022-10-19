@@ -147,7 +147,7 @@ const RegisterForm = ({ setAction }) => {
         <h5>¿Ya estás registrado?</h5>
         <button
           onClick={() => setAction("log")}
-          className="btn btn-qatar w-100"
+          className="btn btn-qatar-lg fw-bold w-100"
         >
           Ingresa aquí
         </button>
