@@ -15,6 +15,7 @@ exports.authController = {
       username: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
+      birth: req.body.birth,
       location: {
         lat: req.body.lat,
         lng: req.body.lng,

@@ -1,4 +1,6 @@
-const { default: decimal2sexagesimalNext } = require("geolib/es/decimalToSexagesimal");
+const {
+  default: decimal2sexagesimalNext,
+} = require("geolib/es/decimalToSexagesimal");
 const { Schema, model } = require("mongoose");
 const ObjectId = Schema.Types.ObjectId;
 
@@ -11,6 +13,7 @@ const User = model(
       password: { type: String, required: true },
       roles: [{ type: ObjectId, ref: "Role" }],
       chromes: [{ type: ObjectId, ref: "Chrome" }],
+      birth: { type: String, require: true },
       repeated: [
         {
           chrome: { type: ObjectId, ref: "Chrome" },
