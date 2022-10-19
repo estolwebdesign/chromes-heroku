@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import useForm from "../Hooks/useForm";
 import ReCAPTCHA from "react-google-recaptcha";
+import useAnalyticsEventTracker from "../Hooks/useAnalyticsEventTracker";
 
 const Contact = () => {
+  const gaEventTracker = useAnalyticsEventTracker("Contact");
   const [validCaptcha, setValidCaptcha] = useState(null);
   const [contactForm, handleInputChange] = useForm({
     email: "",
@@ -16,6 +18,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    gaEventTracker("form");
   };
 
   const captchaChange = () => {
@@ -76,11 +79,14 @@ const Contact = () => {
                     onChange={captchaChange}
                   />
                 </div>
-                {validCaptcha &&
-                  <button type="submit" className="btn btn-qatar mt-3 animate__animated animate__fadeInDown">
+                {validCaptcha && (
+                  <button
+                    type="submit"
+                    className="btn btn-qatar mt-3 animate__animated animate__fadeInDown"
+                  >
                     Enviar
                   </button>
-                }
+                )}
               </div>
             </form>
           </div>
