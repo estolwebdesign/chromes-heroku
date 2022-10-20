@@ -54,7 +54,7 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromesw.app'];
+const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromesw.app', 'https://sea-turtle-app-waynq.ondigitalocean.app'];
 
 var corsOptions = {
   origin: function (origin, callback) {
