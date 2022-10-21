@@ -345,6 +345,11 @@
   flex-direction: column-reverse;
 }
 
+#distance-select{
+  min-width: 200px;
+  max-width: 240px;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
