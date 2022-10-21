@@ -14,13 +14,7 @@ const SearchChromes = () => {
   const navigate = useNavigate();
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [searchDistance, setSearchDistance] = useState("5000")
-
-  useEffect(() => {
-    console.log(searchDistance);
-
-    return () => {};
-  }, [searchDistance]);
+  const [searchDistance, setSearchDistance] = useState("5000");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -84,7 +78,7 @@ const SearchChromes = () => {
   const handleNewTransaction = async (chrome, usr) => {
     if (!user) {
       Swal.fire("Registrate", "Para iniciar un intercambio necesitamos que te registres", "info");
-      navigate("/sign");
+      return navigate("/sign", { state: { register: true } });
     }
 
     const body = {
@@ -138,7 +132,7 @@ const SearchChromes = () => {
             FIGURITAS CERCANAS
           </h1>
           <div id="distance-select" class="form-floating ms-auto mb-3">
-            <select name="searchDistance" class="form-select" id="searchDistance" onChange={({target}) => setSearchDistance(target.value)}>
+            <select name="searchDistance" class="form-select" id="searchDistance" onChange={({ target }) => setSearchDistance(target.value)}>
               <option value={"500"}>500 mts</option>
               <option value={"1000"}>1 Km</option>
               <option value={"2000"}>2 Km</option>
@@ -218,7 +212,9 @@ const SearchChromes = () => {
                             <div className="col-lg-4 order-lg-2 order-0 d-flex">
                               <div className="ms-lg-auto mx-auto my-auto" style={{ height: "24px" }}>
                                 <span style={{ height: "24px" }} className="ms-auto">
-                                  Distancia: {usr.distance < 300 ? "Menos de 300 mts" : usr.distance < 1000 ? `${(usr.distance / 1000).toFixed(1) * 1000} Mts` : `${(usr.distance / 1000).toFixed(1)} Kms`} <FontAwesomeIcon icon={faLocationPin} />
+                                  Distancia:{" "}
+                                  {usr.distance < 300 ? "Menos de 300 mts" : usr.distance < 1000 ? `${(usr.distance / 1000).toFixed(1) * 1000} Mts` : `${(usr.distance / 1000).toFixed(1)} Kms`}{" "}
+                                  <FontAwesomeIcon icon={faLocationPin} />
                                 </span>
                               </div>
                             </div>

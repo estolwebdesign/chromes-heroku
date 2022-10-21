@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.442ab3d2.css",
-    "main.js": "/static/js/main.f1d9804d.js",
+    "main.js": "/static/js/main.cb819705.js",
     "static/js/787.49702785.chunk.js": "/static/js/787.49702785.chunk.js",
     "static/media/chromeswap-logo.png": "/static/media/chromeswap-logo.5ff86717b2febf3341fb.png",
     "index.html": "/index.html",
     "main.442ab3d2.css.map": "/static/css/main.442ab3d2.css.map",
-    "main.f1d9804d.js.map": "/static/js/main.f1d9804d.js.map",
+    "main.cb819705.js.map": "/static/js/main.cb819705.js.map",
     "787.49702785.chunk.js.map": "/static/js/787.49702785.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.442ab3d2.css",
-    "static/js/main.f1d9804d.js"
+    "static/js/main.cb819705.js"
   ]
 }

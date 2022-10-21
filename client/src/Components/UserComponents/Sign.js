@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../Context/UserContext";
 import LoginForm from "./SignComponents/LoginForm";
@@ -7,9 +7,20 @@ import RegisterForm from "./SignComponents/RegisterForm";
 import Greeting from "./SignComponents/Greeting";
 
 const Sign = () => {
+  const { state } = useLocation();
   const [action, setAction] = useState("log");
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if (state?.register === true) {
+      setAction("register");
+    }
+
+    return () => {};
+    // eslint-disable-next-line
+  }, [state]);
 
   useEffect(() => {
     if (user) {
