@@ -1,4 +1,4 @@
-import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
+import { faLocationPin, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import UserContext from "../../Context/UserContext";
 import { API } from "../../Global";
 import Loader from "../Layouts/Loader";
+import Greeting from "./SignComponents/Greeting";
 
 const SearchChromes = () => {
   const { user } = useContext(UserContext);
@@ -15,6 +16,7 @@ const SearchChromes = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [searchDistance, setSearchDistance] = useState("5000");
+  const [greeting, setGreeting] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -26,6 +28,7 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (latitude && longitude && user?.id) {
+      setGreeting(false);
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
@@ -49,6 +52,7 @@ const SearchChromes = () => {
     }
 
     if (latitude && longitude && user === null) {
+      setGreeting(true);
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
@@ -125,12 +129,28 @@ const SearchChromes = () => {
 
   return (
     <main className="mb-5">
+      {user === null && (
+        <div className={`container bg-light rounded shadow p-3 mt-3 ${greeting === false ? "d-none" : "d-block"}`}>
+          <div className="text-end">
+            <button className="btn btn-sm btn-outline-dark mt-1 me-1 border-0 py-0 px-1" onClick={() => setGreeting(false)}>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          </div>
+          <Greeting />
+        </div>
+      )}
       <div className="container bg-light rounded shadow p-3 mt-3">
         <div className="d-flex flex-column position-relative w-100">
           <hr className="text-light mt-4 w-100 position-absolute" style={{ borderTop: "4px solid #5c0931" }} />
-          <h1 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light" style={{ zIndex: "1050" }}>
-            FIGURITAS CERCANAS
-          </h1>
+          {user ? (
+            <h1 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light" style={{ zIndex: "1050" }}>
+              FIGURITAS CERCANAS
+            </h1>
+          ) : (
+            <h2 className="text-center bg-qatar px-5 rounded-pill mx-auto fw-bold text-qatar text-light fs-1" style={{ zIndex: "1050" }}>
+              FIGURITAS CERCANAS
+            </h2>
+          )}
           <div id="distance-select" class="form-floating ms-auto mb-3">
             <select name="searchDistance" class="form-select" id="searchDistance" onChange={({ target }) => setSearchDistance(target.value)}>
               <option value={"500"}>500 mts</option>
