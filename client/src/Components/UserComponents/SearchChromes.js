@@ -12,7 +12,6 @@ const SearchChromes = () => {
   const [users, setUsers] = useState();
   const [sorted, setSorted] = useState(false);
   const navigate = useNavigate();
-
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
@@ -76,6 +75,11 @@ const SearchChromes = () => {
   }, [user?.id, latitude, longitude]);
 
   const handleNewTransaction = async (chrome, usr) => {
+    if (!user) {
+      Swal.fire("Registrate", "Para iniciar un intercambio necesitamos que te registres", "info");
+      navigate("/sign");
+    }
+
     const body = {
       from: user.id,
       to: usr,

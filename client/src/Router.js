@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // COMPONENTS
@@ -18,10 +18,8 @@ import SearchChromes from "./Components/UserComponents/SearchChromes";
 import Sign from "./Components/UserComponents/Sign";
 import UserChromes from "./Components/UserComponents/UserChromes";
 import UserTransactions from "./Components/UserComponents/UserTransactions";
-import UserContext from "./Context/UserContext";
 
 const Router = () => {
-  const { user } = useContext(UserContext);
 
   return (
     <BrowserRouter>
