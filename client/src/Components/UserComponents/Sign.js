@@ -13,7 +13,7 @@ const Sign = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/search-chromes");
     }
 
     return () => {};
