@@ -188,16 +188,20 @@ exports.userController = {
 
   getNearestUsers: async (req, res) => {
     try {
-      const mainUser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          location: {
-            lat: req.body.lat,
-            lng: req.body.lng,
+      let mainUser; 
+
+      if (req.params.id) {
+        mainUser = await User.findByIdAndUpdate(
+          req.params.id,
+          {
+            location: {
+              lat: req.body.lat,
+              lng: req.body.lng,
+            },
           },
-        },
-        { new: true }
-      );
+          { new: true }
+        );
+      }
 
       const users = await User.find(
         {},
@@ -218,11 +222,43 @@ exports.userController = {
       const nearest = [];
 
       users.map((user, i) => {
-        if (user._id != req.params.id && user.location.lat) {
+        if (user._id != req.params.id && user.location.lat && mainUser) {
           const distance = geolib.getDistance(
             {
               lat: mainUser.location.lat,
               lng: mainUser.location.lng,
+            },
+            {
+              lat: user.location.lat,
+              lng: user.location.lng,
+            }
+          );
+          if (distance < req.params.distance) {
+            const rates = [];
+            user.transactions.map((trans, i) => {
+              return trans.from.toString() === user._id.toString() &&
+                trans.userRates.offerer.rate
+                ? rates.push(trans.userRates.offerer.rate)
+                : trans.to.toString() === user._id.toString() &&
+                    trans.userRates.recipiant.rate &&
+                    rates.push(trans.userRates.recipiant.rate);
+            });
+            const rating =
+              rates.reduce((partialSum, a) => partialSum + a, 0) / rates.length;
+            nearest.push({
+              _id: user._id,
+              username: user.username,
+              repeated: user.repeated,
+              distance: distance,
+              rating: rating,
+              transactions: user.transactions.length,
+            });
+          }
+        }else if(!mainUser && user.location.lat) {
+          const distance = geolib.getDistance(
+            {
+              lat: req.body.lat,
+              lng: req.body.lng,
             },
             {
               lat: user.location.lat,
@@ -260,7 +296,7 @@ exports.userController = {
         users: nearest,
       });
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
       return res.status(500).json({
         status: "error",
         message: err.message,

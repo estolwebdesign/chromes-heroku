@@ -83,7 +83,21 @@ const Header = () => {
           id="navbarNav"
         >
           <ul className="navbar-nav ms-auto">
-            {!user ? (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/search-chromes" onClick={handleNavbarToggle}>
+                Buscar figuritas
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                to="/contact"
+                onClick={handleNavbarToggle}
+              >
+                Contacto
+              </NavLink>
+            </li>
+            {!user && (
               <>
                 <li className="nav-item">
                   <NavLink
@@ -95,17 +109,9 @@ const Header = () => {
                   </NavLink>
                 </li>
               </>
-            ) : (
+            )}
+            {user && (
               <>
-                <li className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    to="/"
-                    onClick={handleNavbarToggle}
-                  >
-                    Buscar figuritas
-                  </NavLink>
-                </li>
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
@@ -149,15 +155,6 @@ const Header = () => {
                 </li>
               </>
             )}
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                to="/contact"
-                onClick={handleNavbarToggle}
-              >
-                Contacto
-              </NavLink>
-            </li>
           </ul>
         </div>
       </div>

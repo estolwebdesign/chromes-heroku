@@ -30,6 +30,6 @@ module.exports = function (app) {
   app.post("/api/users/add-chrome/:userId/:chromeId", [authJwt.verifyToken, authJwt.isUser], userController.addChrome);
   app.put("/api/users/remove-chrome/:userId/:chromeId", [authJwt.verifyToken, authJwt.isUser], userController.removeChrome);
   app.post("/api/users/set-location/:id", [authJwt.verifyToken, authJwt.isUser], userController.setLocation);
-  app.post("/api/users/get-nearest/:id/:distance", [authJwt.verifyToken, authJwt.isUser], userController.getNearestUsers);
+  app.post("/api/users/get-nearest/:distance/:id?", userController.getNearestUsers);
   app.post("/api/users/get-repeated/:id", [authJwt.verifyToken, authJwt.isUser], userController.getRepeated);
 };

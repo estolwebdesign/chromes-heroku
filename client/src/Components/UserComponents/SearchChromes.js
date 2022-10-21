@@ -38,7 +38,7 @@ const SearchChromes = () => {
         body: JSON.stringify(body),
       };
 
-      fetch(`${API}/users/get-nearest/${user.id}/5000`, requestOptions)
+      fetch(`${API}/users/get-nearest/5000/${user.id}`, requestOptions)
         .then(async (res) => {
           const data = await res.json();
           setUsers(data.users);
@@ -48,8 +48,27 @@ const SearchChromes = () => {
         });
     }
 
-    if (user === null) {
-      navigate("/sign");
+    if (latitude && longitude && user === null) {
+      const body = {
+        lat: latitude.toString(),
+        lng: longitude.toString(),
+      };
+
+      const requestOptions = {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      };
+
+      fetch(`${API}/users/get-nearest/5000`, requestOptions)
+        .then(async (res) => {
+          const data = await res.json();
+          setUsers(data.users);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
 
     return () => {};
