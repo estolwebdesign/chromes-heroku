@@ -25,11 +25,11 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/search-chromes" element={<SearchChromes />} />
+        <Route exact path="/" element={<SearchChromes />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/my-chromes" element={<UserChromes />} />
         <Route path="/my-transactions" element={<UserTransactions />} />
-        <Route exact path="/" element={<Sign />} />
+        <Route path="/sign" element={<Sign />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 
