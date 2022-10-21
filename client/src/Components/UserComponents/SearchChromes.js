@@ -28,7 +28,6 @@ const SearchChromes = () => {
 
   useEffect(() => {
     if (latitude && longitude && user?.id) {
-      setGreeting(false);
       const body = {
         lat: latitude.toString(),
         lng: longitude.toString(),
