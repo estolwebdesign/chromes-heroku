@@ -84,7 +84,7 @@ const Header = () => {
         >
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/search-chromes" onClick={handleNavbarToggle}>
+              <NavLink className="nav-link" to="/" onClick={handleNavbarToggle}>
                 Buscar figuritas
               </NavLink>
             </li>
@@ -102,7 +102,7 @@ const Header = () => {
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
-                    to="/"
+                    to="/sign"
                     onClick={handleNavbarToggle}
                   >
                     Ingresar
