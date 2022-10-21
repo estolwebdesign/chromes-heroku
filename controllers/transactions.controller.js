@@ -333,17 +333,36 @@ exports.transactionsController = {
     try {
       const trans = await Transaction.findById(req.params.id).populate(["from", "to"]);
 
+      let user;
+
       if (trans.from._id.toString() === req.body.author) {
         await Transaction.findByIdAndUpdate(req.params.id, {
           $set: { "userRates.recipiant.rate": req.body.rating, "userRates.recipiant.value": req.body.value.length > 0 ? req.body.value : null },
         });
+        user = await User.findById(trans.to._id);
       }
 
       if (trans.to._id.toString() === req.body.author) {
         await Transaction.findByIdAndUpdate(req.params.id, {
           $set: { "userRates.offerer.rate": req.body.rating, "userRates.recipiant.value": req.body.value.length > 0 ? req.body.value : null },
         });
+        user = await User.findById(trans.from._id);
       }
+
+      const mailOptions = {
+        to: user.email,
+        from: "new-valoration@chromesw.app",
+        subject: "Valoración recibida",
+        html: valueRecivedEmail(trans, user),
+      }
+
+      transporter.sendMail(mailOptions, (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Server is ready to take our messages");
+        }
+      })
 
       const transactions = await Transaction.find({ $or: [{ from: req.body.author }, { to: req.body.author }] }).populate([
         {

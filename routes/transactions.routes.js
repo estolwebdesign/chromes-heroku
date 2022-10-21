@@ -17,6 +17,6 @@ module.exports = function (app) {
   app.put("/api/transactions/rate/:id", [authJwt.verifyToken, authJwt.isUser], controller.rate);
 
   app.post("/api/messages/new-message", [authJwt.verifyToken, authJwt.isUser], messagesController.send);
-
+  app.post("/api/new-contact", messagesController.newContact);
 
 };

@@ -214,6 +214,7 @@ const UserTransactions = () => {
         const messages = data.transaction.messages;
 
         const sockMsg = {
+          transaction: data.transaction._id,
           receiver: user.id === transaction.from._id ? transaction.to : transaction.from,
           messageObj: data.message,
         };

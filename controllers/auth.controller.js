@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const { wellcomeEmail } = require("../html/welcomeEmail");
 
 exports.authController = {
   signUp: (req, res) => {
@@ -43,6 +44,21 @@ exports.authController = {
           res.send({ message: "User was registered successfully!" });
         });
       });
+
+      const mailOptions = {
+        to: user.email,
+        from: "wellcome@chromesw.app",
+        subject: "Bienvenido a ChromeSwapp!!",
+        html: wellcomeEmail(user),
+      }
+
+      transporter.sendMail(mailOptions, (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Server is ready to take our messages");
+        }
+      })
     });
   },
 

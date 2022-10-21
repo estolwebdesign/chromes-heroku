@@ -7,8 +7,11 @@ const app = express();
 const dbConfig = require("../config/db.config");
 const db = require("../models");
 const Role = db.role;
+const User = db.user;
+const Transaction = db.transaction;
 const PORT = process.env.PORT || 8080;
 const socket = require("socket.io");
+const { messagesController } = require("../controllers/messages.controller");
 
 db.mongoose
   .connect(`mongodb+srv://estol1991:rominola1995@cluster0.15o6vqz.mongodb.net/?retryWrites=true&w=majority`)
@@ -54,17 +57,17 @@ function initial() {
   });
 }
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://chromesw.app', 'https://sea-turtle-app-waynq.ondigitalocean.app'];
+const whitelist = ["http://localhost:3000", "http://localhost:8080", "https://chromesw.app", "https://sea-turtle-app-waynq.ondigitalocean.app"];
 
 var corsOptions = {
   origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
+    console.log("** Origin of request " + origin);
     if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
+      console.log("Origin acceptable");
+      callback(null, true);
     } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
+      console.log("Origin rejected");
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
@@ -82,14 +85,14 @@ app.use((req, res, next) => {
   next();
 });
 
-const path = require('path');
+const path = require("path");
 // if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, '../client/build')));
+// Serve any static files
+app.use(express.static(path.join(__dirname, "../client/build")));
 // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 // }
 
 app.use(bodyParser.json());
@@ -125,6 +128,8 @@ io.on("connection", (socket) => {
     const sendUserSocket = onlineUsers.get(data.receiver._id);
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("response", data.messageObj);
+    } else {
+      messagesController.newMessageMail(data);
     }
   });
 });
