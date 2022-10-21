@@ -216,7 +216,7 @@
 .btn-qatar-lg:active {
   transition: all 300ms;
   background-color: #5c0931;
-  color: #f8f9fa;  
+  color: #f8f9fa;
 }
 
 .btn-qatar {
@@ -345,7 +345,7 @@
   flex-direction: column-reverse;
 }
 
-#distance-select{
+#distance-select {
   min-width: 200px;
   max-width: 240px;
 }
@@ -369,6 +369,7 @@ button {
 main {
   margin-top: 3.5rem;
   margin-bottom: 40px;
+  padding: 0 0.5rem 0 0.5rem;
 }
 
 .on {
