@@ -10,6 +10,16 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { wellcomeEmail } = require("../html/welcomeEmail");
 
+const transporter = nodemailer.createTransport({
+  host: "mail.privateemail.com",
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: "contact@chromesw.app",
+    pass: "Rominola/1995",
+  },
+});
+
 exports.authController = {
   signUp: (req, res) => {
     const user = new User({

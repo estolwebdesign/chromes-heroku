@@ -69,7 +69,7 @@ exports.newMessageEmail = (transaction, user) => {
           <section class="w-500 mx-auto border p-3">
             <h2 class="center mt-0">Nuevo mensaje recibido.</h2>
             <p>Hola ${user.username},</p>
-            <p>Has recibido un nuevo mensaje de ${transaction.from.username === user.username ? transaction.to.username : transaction.from.username} en su intercambio por las figuritas ${transaction.chromes[0].name} y ${transaction.chromes[1].name}.</p>
+            <p>Has recibido un nuevo mensaje de ${transaction.from.username === user.username ? transaction.to.username : transaction.from.username} en su intercambio por las figuritas ${transaction.chromes.get.name} y ${transaction.chromes.drop.name}.</p>
             <p>Para responderle puedes ingresara tu cuenta de ChromeSwapp a la seccion "Mis intercambios".</p>
             <p style="margin-top: 20px"><small>No respondas a esta casilla de correo electrónico, si tienes alguna duda pod favor contactanos desde nuestro fromulario de contacto en la pagina de <a href="https://chromesw.app/contact" target="_blank" rel="noopener noreferrer">chromesw.app</a></small></p>
           </section>

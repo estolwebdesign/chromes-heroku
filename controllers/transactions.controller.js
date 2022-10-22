@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const Transaction = db.transaction;
 const nodemailer = require("nodemailer");
 const { newTransactionEmail } = require("../html/newTransactionEmail");
+const { valueRecivedEmail } = require("../html/valueRecivedEmail");
 
 const transporter = nodemailer.createTransport({
   host: "mail.privateemail.com",
@@ -339,14 +340,14 @@ exports.transactionsController = {
         await Transaction.findByIdAndUpdate(req.params.id, {
           $set: { "userRates.recipiant.rate": req.body.rating, "userRates.recipiant.value": req.body.value.length > 0 ? req.body.value : null },
         });
-        user = await User.findById(trans.to._id);
+        user = await User.findById(trans.to._id.toString());
       }
 
       if (trans.to._id.toString() === req.body.author) {
         await Transaction.findByIdAndUpdate(req.params.id, {
           $set: { "userRates.offerer.rate": req.body.rating, "userRates.recipiant.value": req.body.value.length > 0 ? req.body.value : null },
         });
-        user = await User.findById(trans.from._id);
+        user = await User.findById(trans.from._id.toString());
       }
 
       const mailOptions = {
@@ -398,6 +399,7 @@ exports.transactionsController = {
         transactions: transactions,
       });
     } catch (err) {
+      console.log(err)
       return res.status(500).json({
         status: "error",
         message: err.message,

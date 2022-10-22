@@ -2,7 +2,19 @@ const { newContactEmail } = require("../html/newContactEmail");
 const { newMessageEmail } = require("../html/newMessageEmail");
 const db = require("../models");
 const Message = db.message;
+const User = db.user;
 const Transaction = db.transaction;
+const nodemailer = require("nodemailer")
+
+const transporter = nodemailer.createTransport({
+  host: "mail.privateemail.com",
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: "contact@chromesw.app",
+    pass: "Rominola/1995",
+  },
+});
 
 exports.messagesController = {
   send: async (req, res) => {
@@ -99,7 +111,7 @@ exports.messagesController = {
         to: user.email,
         from: "nuevo-mensaje@chromesw.app",
         subject: "Nuevo mensaje recibido",
-        html: newMessageEmail(trans, user),
+        html: newMessageEmail(transaction, user),
       }
 
       transporter.sendMail(mailOptions, (err, success) => {
@@ -120,7 +132,7 @@ exports.messagesController = {
         to: "contact@chromesw.app",
         from: "new-contact@chromesw.app",
         subject: "Nueva solicitud de contacto",
-        html: newContactEmail(req.body.contact),
+        html: newContactEmail(req.body),
       }
 
       transporter.sendMail(mailOptions, (err, success) => {
@@ -129,6 +141,11 @@ exports.messagesController = {
         } else {
           console.log("Server is ready to take our messages");
         }
+      })
+
+      return res.status(200).json({
+        status: "success",
+        message: "form send",
       })
     } catch (err) {
       console.error(err);

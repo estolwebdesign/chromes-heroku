@@ -3,6 +3,17 @@ const User = db.user;
 const Trasnaction = db.transaction;
 const Chrome = db.chrome;
 const geolib = require("geolib");
+const nodemailer = require("nodemailer")
+
+const transporter = nodemailer.createTransport({
+  host: "mail.privateemail.com",
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: "contact@chromesw.app",
+    pass: "Rominola/1995",
+  },
+});
 
 exports.userController = {
   addChrome: async (req, res) => {

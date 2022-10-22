@@ -1,5 +1,16 @@
 const db = require("../models");
 const Chrome = db.chrome;
+const nodemailer = require("nodemailer")
+
+const transporter = nodemailer.createTransport({
+  host: "mail.privateemail.com",
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: "contact@chromesw.app",
+    pass: "Rominola/1995",
+  },
+});
 
 exports.chromesController = {
   create: async (req, res) => {

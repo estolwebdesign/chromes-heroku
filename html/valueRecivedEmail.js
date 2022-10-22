@@ -69,7 +69,7 @@ exports.valueRecivedEmail = (transaction, user) => {
           <section class="w-500 mx-auto border p-3">
             <h2 class="center mt-0">Valoracón por intercambio recibida.</h2>
             <p>Hola ${user.username},</p>
-            <p>Has recibido la valoración que hizo ${transaction.from.username === user.username ? transaction.to.username : transaction.from.username} de ti en su intercambio por las figuritas ${transaction.chromes[0].name} y ${transaction.chromes[1].name}.</p>
+            <p>Has recibido la valoración que hizo ${transaction.from.username === user.username ? transaction.to.username : transaction.from.username} de ti en su intercambio por las figuritas ${transaction.chromes.get.name} y ${transaction.chromes.drop.name}.</p>
             <p>Si no has valorado a tu contraparte, te pedimos que lo hagas para ayudar a los demás coleccionistas a la hora de realizar intercambios con ese usuario. Podrás hacerlo en la sección "Mis Intercambios" de cuenta en ChromeSwapp.</p>
             <p style="margin-top: 20px"><small>No respondas a esta casilla de correo electrónico, si tienes alguna duda pod favor contactanos desde nuestro fromulario de contacto en la pagina de <a href="https://chromesw.app/contact" target="_blank" rel="noopener noreferrer">chromesw.app</a></small></p>
           </section>
