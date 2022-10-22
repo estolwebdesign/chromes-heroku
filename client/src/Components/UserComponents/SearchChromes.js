@@ -76,7 +76,7 @@ const SearchChromes = () => {
 
     return () => {};
     // eslint-disable-next-line
-  }, [latitude, longitude, searchDistance]);
+  }, [user, latitude, longitude, searchDistance]);
 
   const handleNewTransaction = async (chrome, usr) => {
     if (!user) {
